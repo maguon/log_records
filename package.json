@@ -1,0 +1,24 @@
+{
+    "name": "log_record",
+    "version": "0.0.1",
+    "dependencies": {
+        "assert-plus": "*",
+        "log4js": "*",
+        "mongodb": "2.2.24",
+        "mysql": "*",
+        "Promise" : "1.0.5" ,
+        "posix-getopt": "1.0.0",
+        "request": "*",
+        "restify": "4.3.0",
+        "restify-errors" :"4.3.0",
+        "restify-plugins" :"1.5.1"
+    },
+    "scripts": {
+        "start": "node main.js",
+        "test": "mocha test"
+    },
+    "author": "myxxjs",
+    "repository" : "https://github.com/maguon/log_records.git",
+    "description": "The project for log operator records",
+    "license": "MIT"
+}
