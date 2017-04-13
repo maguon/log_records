@@ -1,0 +1,194 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "The documents for myxxjs save record api",
+    "version": "1.0.0",
+    "title": "Logistic record api doc",
+    "contact": {
+      "email": "info@myxxjs.com"
+    },
+    "license": {
+      "name": "View source at github",
+      "url": "https://github.com/maguon/log_records"
+    }
+  },
+  "host": "stg.myxxjs.com:9004",
+  "basePath": "/api",
+  "tags": [
+    {
+      "name": "car",
+      "description": "car operation records",
+      "externalDocs": {
+        "description": " records api"
+      }
+    }
+  ],
+  "schemes": [
+    "http"
+  ],
+  "paths": {
+    "/user/{userId}/car/{carId}/record": {
+      "get": {
+        "tags": [
+          "car"
+        ],
+        "summary": "get car all records",
+        "description": "get car all records incloud image and operation ",
+        "operationId": "getCarRecord",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "carId",
+            "in": "path",
+            "description": "The car unique id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/car/{carId}/vin/{vin}/storageImage": {
+      "post": {
+        "tags": [
+          "car"
+        ],
+        "summary": "uploads car image",
+        "description": "",
+        "operationId": "saveStorageImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "description": "car unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "vin",
+            "in": "path",
+            "description": "car unique vin code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/car/{carId}/vin/{vin}/record": {
+      "post": {
+        "tags": [
+          "car"
+        ],
+        "summary": "uploads car record",
+        "description": "",
+        "operationId": "saveCarRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "description": "car unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "vin",
+            "in": "path",
+            "description": "car unique vin code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "record info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/record"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "image": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        }
+      }
+    },
+    "record": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "content": {
+          "type": "string"
+        }
+      }
+    }
+  }
+
+}
