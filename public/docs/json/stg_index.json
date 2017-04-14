@@ -19,7 +19,16 @@
       "name": "car",
       "description": "car operation records",
       "externalDocs": {
+        "url" : "stg.myxxjs.com:9004",
         "description": " records api"
+      }
+    },
+    {
+      "name": "operate",
+      "description": "user operation records",
+      "externalDocs": {
+        "url" : "stg.myxxjs.com:9004",
+        "description": " operate records api"
       }
     }
   ],
@@ -152,6 +161,115 @@
           }
         }
       }
+    },
+    "/opRecord": {
+      "post": {
+        "tags": [
+          "operate"
+        ],
+        "summary": "uploads user operate record",
+        "description": "",
+        "operationId": "saveOperateRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "opRecord",
+            "in": "body",
+            "description": "op{11:import,12:moving,13:export} ",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/opRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "operate"
+        ],
+        "summary": "query user operate record",
+        "description": "",
+        "operationId": "getOperateRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "op",
+            "in": "query",
+            "description": "op{11:import,12:moving,13:export} ",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "user unique id ",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "username",
+            "in": "query",
+            "description": "operate user name ",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "userType",
+            "in": "query",
+            "description": "operate user type ",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "carId",
+            "in": "query",
+            "description": "car unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "vin",
+            "in": "query",
+            "description": "car vin code",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start pos for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "query size for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -185,6 +303,32 @@
           "type": "integer"
         },
         "content": {
+          "type": "string"
+        }
+      }
+    },
+    "opRecord": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "carId": {
+          "type": "integer"
+        },
+        "vin": {
+          "type": "string"
+        },
+        "op": {
+          "type": "integer"
+        },
+        "comment": {
           "type": "string"
         }
       }

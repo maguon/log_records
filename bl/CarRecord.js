@@ -16,10 +16,10 @@ const  getCarRecords =  (req,res,next) => {
     var params = req.params;
     carRecordDAO.getCarRecords(params,(error,result)=>{
         if (error) {
-            logger.error(' getIndex ' + error.message);
+            logger.error(' getCarRecords ' + error.message);
             throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
         } else {
-            logger.info(' getIndex ' + 'success');
+            logger.info(' getCarRecords ' + 'success');
             resUtil.resetQueryRes(res,result,null);
             return next();
         }

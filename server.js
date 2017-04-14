@@ -10,6 +10,7 @@ const sysConfig = require('./config/SystemConfig');
 const serverLogger = require('./util/ServerLogger');
 const logger = serverLogger.createLogger('Server');
 const carRecord = require('./bl/CarRecord');
+const operateRecord = require('./bl/OperateRecord');
 
 ///--- API
 
@@ -79,6 +80,8 @@ function createServer() {
     server.get('/api/user/:userId/car/:carId/record',carRecord.getCarRecords);
     server.post({path:'/api/car/:carId/vin/:vin/storageImage',contentType: 'application/json'} ,carRecord.saveStorageImage);
     server.post({path:'/api/car/:carId/vin/:vin/record',contentType: 'application/json'} ,carRecord.saveRecord);
+    server.get('/api/opRecord',operateRecord.getOperateRecord);
+    server.post({path:'/api/opRecord',contentType: 'application/json'} ,operateRecord.saveOperateRecord);
 
     server.on('NotFound', function (req, res, next) {
         logger.warn(req.url + " not found");
