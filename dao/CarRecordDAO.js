@@ -48,7 +48,7 @@ const saveStorageImage =(params,callback)=>{
 const saveRecord =(params,callback)=>{
 
     const query = {id:params.carId,vin:params.vin};
-    const update = { $push: { comment: {id:params.userId,name:params.username,type:params.userType,content:params.content,timez: Date.now()} }}
+    const update = { $push: { comment: {id:params.userId,name:params.username,type:params.userType,op:params.op,content:params.content,timez: Date.now()} }}
     recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
         callback(error,result);
     })
