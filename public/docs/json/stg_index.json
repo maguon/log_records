@@ -304,6 +304,9 @@
         },
         "content": {
           "type": "string"
+        },
+        "op": {
+          "type": "integer"
         }
       }
     },
