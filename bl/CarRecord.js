@@ -8,6 +8,7 @@ const resUtil = require('../util/ResponseUtil');
 const serverLogger = require('../util/ServerLogger');
 const logger = serverLogger.createLogger('CarRecord');
 const carRecordDAO = require('../dao/CarRecordDAO');
+const operateRecordDAO = require('../dao/OperateRecordDAO');
 
 
 
@@ -42,6 +43,12 @@ const saveStorageImage = (req,res,next) =>{
 
 const saveRecord = (req,res,next) =>{
     var params = req.params;
+    params.comment = params.content;
+    operateRecordDAO.saveOperateRecord(params,(error,result)=>{
+        if(error){
+            logger.error(' saveOperateRecord ' + error.message);
+        }
+    })
     carRecordDAO.saveRecord(params,(error,result)=>{
         if (error) {
             logger.error(' saveRecord ' + error.message);
