@@ -92,7 +92,6 @@ function createServer() {
         res.send(404,{success:false,msg:" service not found !"});
         next();
     });
-
     return (server);
 
 }

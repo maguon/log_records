@@ -52,7 +52,8 @@ const saveOperateRecord =(params,callback)=>{
         username : params.username,
         userType : params.userType,
         comment : params.comment,
-        op : params.op
+        op : params.op ,
+        created_on : Date.now()
     })
     operateObj.save(function(error,result){
         logger.debug('saveOperateRecord') ;
