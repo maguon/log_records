@@ -117,7 +117,7 @@
       }
     },
     "/user/{userId}/record/{recordId}/image/{url}": {
-      "post": {
+      "delete": {
         "tags": [
           "car"
         ],
