@@ -14,7 +14,7 @@ const operateRecordDAO = require('../dao/OperateRecordDAO');
 
 
 const  getCarRecords =  (req,res,next) => {
-    var params = req.params;
+    let params = req.params;
     carRecordDAO.getCarRecords(params,(error,result)=>{
         if (error) {
             logger.error(' getCarRecords ' + error.message);
@@ -28,7 +28,7 @@ const  getCarRecords =  (req,res,next) => {
 }
 
 const saveStorageImage = (req,res,next) =>{
-    var params = req.params;
+    let params = req.params;
     carRecordDAO.saveStorageImage(params,(error,result)=>{
         if (error) {
             logger.error(' saveStorageImage ' + error.message);
@@ -42,7 +42,7 @@ const saveStorageImage = (req,res,next) =>{
 }
 
 const saveRecord = (req,res,next) =>{
-    var params = req.params;
+    let params = req.params;
     params.comment = params.content;
     operateRecordDAO.saveOperateRecord(params,(error,result)=>{
         if(error){
@@ -59,6 +59,20 @@ const saveRecord = (req,res,next) =>{
             return next();
         }
     })
+};
+
+const removeCarImage = (req,res,next) =>{
+    let params = req.params;
+    carRecordDAO.removeStorageImage(params,(error,result)=>{
+        if (error) {
+            logger.error(' saveRecord ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' saveRecord ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
 }
 
-module.exports = {getCarRecords,saveStorageImage,saveRecord};
+module.exports = {getCarRecords,saveStorageImage,saveRecord,removeCarImage};

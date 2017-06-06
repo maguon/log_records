@@ -82,6 +82,7 @@ function createServer() {
         maxAge: 0}));
 
     server.get('/api/user/:userId/car/:carId/record',carRecord.getCarRecords);
+    server.delete('/api/user/:userId/record/:recordId/image/:url',carRecord.removeCarImage);
     server.post({path:'/api/car/:carId/vin/:vin/storageImage',contentType: 'application/json'} ,carRecord.saveStorageImage);
     server.post({path:'/api/car/:carId/vin/:vin/record',contentType: 'application/json'} ,carRecord.saveRecord);
     server.get('/api/opRecord',operateRecord.getOperateRecord);

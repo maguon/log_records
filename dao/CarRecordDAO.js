@@ -53,6 +53,35 @@ const saveRecord =(params,callback)=>{
         callback(error,result);
     })
 }
+
+const removeStorageImage = (params,callback) => {
+    const recordId = params.recordId;
+    const url = params.url;
+    try{
+        recordModel.findById(recordId).then((doc)=> {
+            console.log(doc);
+            let index =-1;
+            for(var i =0;i<doc.storage_image.length;i++){
+                if(doc.storage_image[i].url == url){
+                    if(doc.storage_image.length>1){
+                        doc.storage_image.splice(i,1);
+                    }else{
+                        doc.storage_image =[];
+                    }
+                    doc.save().then(doc=>{
+                        callback(null,doc)
+                    })
+                    break;
+                }
+            }
+            //callback(null,doc)
+        })
+    }catch (e){
+        callback(e,null)
+    }
+
+}
+
 module.exports = {
-    getCarRecords ,saveStorageImage,saveRecord
+    getCarRecords ,saveStorageImage,saveRecord,removeStorageImage
 }
