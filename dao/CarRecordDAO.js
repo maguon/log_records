@@ -61,20 +61,30 @@ const removeStorageImage = (params,callback) => {
         recordModel.findById(recordId).then((doc)=> {
             console.log(doc);
             let index =-1;
-            for(var i =0;i<doc.storage_image.length;i++){
-                if(doc.storage_image[i].url == url){
-                    if(doc.storage_image.length>1){
-                        doc.storage_image.splice(i,1);
-                    }else{
-                        doc.storage_image =[];
+            if(doc &&doc.storage_image ){
+                for(var i =0;i<doc.storage_image.length;i++){
+                    if(doc.storage_image[i].url == url){
+                        if(doc.storage_image.length>1){
+                            doc.storage_image.splice(i,1);
+                        }else{
+                            doc.storage_image =[];
+                        }
+                        break;
                     }
-                    doc.save().then(doc=>{
-                        callback(null,doc)
-                    })
-                    break;
                 }
+                doc.save().then(doc=>{
+                    callback(null,doc)
+                }).catch((error)=>{
+                    callback(error,null)
+                })
+            }else{
+                callback(null,[])
             }
+
             //callback(null,doc)
+        }).catch((error)=>{
+            //console.log(error.stack);
+            callback(error,null)
         })
     }catch (e){
         callback(e,null)
