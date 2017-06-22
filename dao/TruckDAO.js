@@ -8,7 +8,7 @@ const logger = serverLogger.createLogger('TruckDAO.js');
 
 
 const getTruckGps = (params,callback)=>{
-    let query = truckModel.find({}).select('_id sim vhe_no lat lon vel oil angel mileage update_on');
+    let query = truckModel.find({}).select('_id sim vhe_no lat lon vel oil angle mileage update_on');
     if(params.truckId){
         query.where('_id').equals(params.truckId);
     }
