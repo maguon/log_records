@@ -30,6 +30,14 @@
         "url" : "stg.myxxjs.com:9004",
         "description": " operate records api"
       }
+    },
+    {
+      "name": "truck",
+      "description": "truck gps info",
+      "externalDocs": {
+        "url" : "stg.myxxjs.com:9004",
+        "description": " query truck gps api"
+      }
     }
   ],
   "schemes": [
@@ -310,6 +318,33 @@
         ],
         "responses": {
           "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/truckGps": {
+      "get": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "get all truck gps info current",
+        "description": "get  all  gps ,velocity ,oil etc",
+        "operationId": "getTruckGps",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user unique id",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "default": {
             "description": "successful operation"
           }
         }

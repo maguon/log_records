@@ -11,6 +11,7 @@ const serverLogger = require('./util/ServerLogger');
 const logger = serverLogger.createLogger('Server');
 const carRecord = require('./bl/CarRecord');
 const operateRecord = require('./bl/OperateRecord');
+const truck = require('./bl/Truck');
 
 ///--- API
 
@@ -87,6 +88,8 @@ function createServer() {
     server.post({path:'/api/car/:carId/vin/:vin/record',contentType: 'application/json'} ,carRecord.saveRecord);
     server.get('/api/opRecord',operateRecord.getOperateRecord);
     server.post({path:'/api/opRecord',contentType: 'application/json'} ,operateRecord.saveOperateRecord);
+
+    server.get('/api/user/:userId/truckGps',truck.getTruckGps);
 
     server.on('NotFound', function (req, res, next) {
         logger.warn(req.url + " not found");
