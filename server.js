@@ -12,6 +12,7 @@ const logger = serverLogger.createLogger('Server');
 const carRecord = require('./bl/CarRecord');
 const operateRecord = require('./bl/OperateRecord');
 const truck = require('./bl/Truck');
+const userBl = require('./bl/UserBl');
 
 ///--- API
 
@@ -90,6 +91,19 @@ function createServer() {
     server.post({path:'/api/opRecord',contentType: 'application/json'} ,operateRecord.saveOperateRecord);
 
     server.get('/api/user/:userId/truckGps',truck.getTruckGps);
+
+    server.get('/api/user/:userId/truck/:vhe/record',truck.getTruckRecords);
+    server.del('/api/user/:userId/record/:recordId/truck/:vhe/image/:url',truck.removeTruckImage);
+    server.post({path:'/api/user/:userId/truck/:vhe/image',contentType: 'application/json'} ,truck.saveTruckImage);
+    server.post({path:'/api/truck/:vhe/record',contentType: 'application/json'} ,truck.saveTruckRecord);
+
+    server.get('/api/user/:userId/tuser/:tid/record',userBl.getUserRecords);
+    server.del('/api/user/:userId/record/:recordId/tuser/:tid/image/:url',userBl.removeUserImage);
+    server.post({path:'/api/user/:userId/tuser/:tid/image',contentType: 'application/json'} ,userBl.saveUserImage);
+    server.post({path:'/api/tuser/:tid/record',contentType: 'application/json'} ,userBl.saveUserRecords);
+
+
+
 
     server.on('NotFound', function (req, res, next) {
         logger.warn(req.url + " not found");

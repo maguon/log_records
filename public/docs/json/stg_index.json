@@ -36,7 +36,15 @@
       "description": "truck gps info",
       "externalDocs": {
         "url" : "stg.myxxjs.com:9004",
-        "description": " query truck gps api"
+        "description": " query truck gps and record api"
+      }
+    },
+    {
+      "name": "tuser",
+      "description": "target user  info",
+      "externalDocs": {
+        "url" : "stg.myxxjs.com:9004",
+        "description": " query target user record api"
       }
     }
   ],
@@ -345,6 +353,349 @@
         ],
         "responses": {
           "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/truck/{vhe}/record": {
+      "get": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "get truck all records",
+        "description": "get truck all records incloud image and operation ",
+        "operationId": "getTruckRecord",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "vhe",
+            "in": "path",
+            "description": "The truck unique license NO. ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/truck/{vhe}/image": {
+      "post": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "uploads truck image",
+        "description": "",
+        "operationId": "saveTruckImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "vhe",
+            "in": "path",
+            "description": "truck unique license series number",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/record/{recordId}/truck/{vhe}/image/{url}": {
+      "delete": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "remove a  truck image",
+        "description": "",
+        "operationId": "removeTruckImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "truck record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "vhe",
+            "in": "path",
+            "description": "truck license number series",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/truck/{vhe}/record": {
+      "post": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "uploads truck record",
+        "description": "",
+        "operationId": "saveTruckRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "vhe",
+            "in": "path",
+            "description": "truck license number series",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "record info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/record"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+
+    "/user/{userId}/tuser/{tid}/record": {
+      "get": {
+        "tags": [
+          "tuser"
+        ],
+        "summary": "get target uer all records",
+        "description": "get user all records incloud image and operation ",
+        "operationId": "getUserRecord",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "The user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "tid",
+            "in": "path",
+            "description": "The target user unique id ",
+            "required": true,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/tuser/{tid}/image": {
+      "post": {
+        "tags": [
+          "tuser"
+        ],
+        "summary": "uploads tuser image",
+        "description": "",
+        "operationId": "saveUserImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "tid",
+            "in": "path",
+            "description": "target user uniqueid",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/record/{recordId}/tuser/{tid}/image/{url}": {
+      "delete": {
+        "tags": [
+          "tuser"
+        ],
+        "summary": "remove a  target user image",
+        "description": "",
+        "operationId": "removeUserImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "truck record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tid",
+            "in": "path",
+            "description": "target user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/tuser/{tid}/record": {
+      "post": {
+        "tags": [
+          "tuser"
+        ],
+        "summary": "uploads user record",
+        "description": "",
+        "operationId": "saveUserRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "tid",
+            "in": "path",
+            "description": "target user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "record info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/record"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
             "description": "successful operation"
           }
         }

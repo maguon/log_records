@@ -17,4 +17,21 @@ const truckEntity = new Schema({
     updated_on : Date
 });
 
-module.exports = {truckEntity}
+const truckInfoEntity = new Schema({
+    vhe : String,
+    images : Array,
+    comments : Array,
+    status : Number
+})
+
+const opTruckEntity = new Schema({
+    userId:Number,
+    username:String,
+    userType:Number,
+    vhe:String,
+    op:Number,
+    comment:String,
+    created : {type:Date ,default : Date.now()}
+});
+
+module.exports = {truckEntity ,truckInfoEntity ,opTruckEntity }

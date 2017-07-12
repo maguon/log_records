@@ -3,7 +3,7 @@
     "version": "0.0.1",
     "dependencies": {
         "assert-plus": "1.0.0",
-        "log4js": "*",
+        "log4js": "1.1.1",
         "mongoose": "4.9.4",
         "mysql": "*",
         "Promise" : "1.0.5" ,
