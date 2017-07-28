@@ -41,8 +41,9 @@ const getTruckRecords = (params,callback)=>{
         query.where('status').equals(params.status);
     }
     if(params.vhe){
-        var regString = new RegExp(params.vhe);
-        query.or([{vhe:regString}])
+        /*var regString = new RegExp(params.vhe);
+        query.or([{vhe:regString}])*/
+        query.where('vhe').equals(params.vhe);
 
     }
     if(params.start&&params.size){
