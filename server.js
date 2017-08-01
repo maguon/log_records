@@ -95,7 +95,7 @@ function createServer() {
     server.get('/api/user/:userId/truck/:vhe/record',truck.getTruckRecords);
     server.del('/api/user/:userId/record/:recordId/truck/:vhe/image/:url',truck.removeTruckImage);
     server.post({path:'/api/user/:userId/truck/:vhe/image',contentType: 'application/json'} ,truck.saveTruckImage);
-    server.post({path:'/api/truck/:vhe/record',contentType: 'application/json'} ,truck.saveTruckRecord);
+    server.post({path:'/api/truckRecord',contentType: 'application/json'} ,truck.saveTruckRecord);
 
     server.get('/api/user/:userId/tuser/:tid/record',userBl.getUserRecords);
     server.del('/api/user/:userId/record/:recordId/tuser/:tid/image/:url',userBl.removeUserImage);

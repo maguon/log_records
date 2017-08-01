@@ -489,7 +489,7 @@
         }
       }
     },
-    "/truck/{vhe}/record": {
+    "/truckRecord": {
       "post": {
         "tags": [
           "truck"
@@ -505,13 +505,7 @@
         ],
         "parameters": [
 
-          {
-            "name": "vhe",
-            "in": "path",
-            "description": "truck license number series",
-            "required": true,
-            "type": "string"
-          },
+
           {
             "name": "record",
             "in": "body",
