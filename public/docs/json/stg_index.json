@@ -47,6 +47,14 @@
         "description": " query target user record api"
       }
     }
+    {
+      "name": "route",
+      "description": "route task record",
+      "externalDocs": {
+        "url" : "stg.myxxjs.com:9004",
+        "description": "query route task record info"
+      }
+    }
   ],
   "schemes": [
     "http"
@@ -694,7 +702,82 @@
           }
         }
       }
-    }
+    },
+    "/routeRecord": {
+      "post": {
+        "tags": [
+          "route"
+        ],
+        "summary": "uploads user operate route record",
+        "description": "",
+        "operationId": "saveRouteRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "routeRecord",
+            "in": "body",
+            "description": "op{31:create,32:accept,33:doing,34:on road,38:cancel,39:completed} ",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/routeRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "operate"
+        ],
+        "summary": "query user operate route record",
+        "description": "",
+        "operationId": "getRouteRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "routeId",
+            "in": "query",
+            "description": "route unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start pos for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "query size for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
   },
   "definitions": {
     "image": {
@@ -753,6 +836,26 @@
           "type": "string"
         },
         "op": {
+          "type": "integer"
+        },
+        "comment": {
+          "type": "string"
+        }
+      }
+    },
+    "routeRecord": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "routeId": {
           "type": "integer"
         },
         "comment": {

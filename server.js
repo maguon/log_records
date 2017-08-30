@@ -13,6 +13,7 @@ const carRecord = require('./bl/CarRecord');
 const operateRecord = require('./bl/OperateRecord');
 const truck = require('./bl/Truck');
 const userBl = require('./bl/UserBl');
+const routeRecord = require('./bl/RouteRecord');
 
 ///--- API
 
@@ -101,6 +102,10 @@ function createServer() {
     server.del('/api/user/:userId/record/:recordId/tuser/:tid/image/:url',userBl.removeUserImage);
     server.post({path:'/api/user/:userId/tuser/:tid/image',contentType: 'application/json'} ,userBl.saveUserImage);
     server.post({path:'/api/tuser/:tid/record',contentType: 'application/json'} ,userBl.saveUserRecords);
+
+
+    server.get('/api/routeRecord',routeRecord.getRouteRecords);
+    server.post({path:'/api/routeRecord',contentType: 'application/json'} ,routeRecord.saveRouteRecord);
 
 
 

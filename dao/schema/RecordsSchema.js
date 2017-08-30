@@ -29,4 +29,11 @@ const operateRecord = new Schema({
     created_on : {type:Date ,default : Date.now()}
 })
 
-module.exports = {carRecord,operateRecord}
+const routeRecord = new Schema({
+    id : Number ,
+    comment : {type: Array},
+    status : Number,
+    created_on : {type:Date ,default : Date.now()}
+})
+
+module.exports = {carRecord,operateRecord,routeRecord}

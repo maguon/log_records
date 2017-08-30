@@ -41,6 +41,7 @@ const saveStorageImage =(params,callback)=>{
     const query = {id:params.carId,vin:params.vin};
     const update = { $push: { storage_image: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()} }}
     recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+        logger.debug(' saveStorageImage ') ;
         callback(error,result);
     })
 }
@@ -50,6 +51,7 @@ const saveRecord =(params,callback)=>{
     const query = {id:params.carId,vin:params.vin};
     const update = { $push: { comment: {id:params.userId,name:params.username,type:params.userType,op:params.op,content:params.content,timez: Date.now()} }}
     recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+        logger.debug(' saveRecord ') ;
         callback(error,result);
     })
 }
@@ -59,7 +61,6 @@ const removeStorageImage = (params,callback) => {
     const url = params.url;
     try{
         recordModel.findById(recordId).then((doc)=> {
-            console.log(doc);
             let index =-1;
             if(doc &&doc.storage_image ){
                 for(var i =0;i<doc.storage_image.length;i++){
