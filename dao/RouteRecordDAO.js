@@ -1,4 +1,4 @@
-
+'use strict'
 const routeRecord = require('./schema/RecordsSchema.js').routeRecord ;
 const q = require('mongoose').query;
 const sysConfig = require('../config/SystemConfig.js');
