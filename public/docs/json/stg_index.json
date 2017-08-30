@@ -46,7 +46,7 @@
         "url" : "stg.myxxjs.com:9004",
         "description": " query target user record api"
       }
-    }
+    },
     {
       "name": "route",
       "description": "route task record",
