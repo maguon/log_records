@@ -858,7 +858,7 @@
         "routeId": {
           "type": "integer"
         },
-        "comment": {
+        "content": {
           "type": "string"
         }
       }
