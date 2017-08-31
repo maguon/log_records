@@ -736,7 +736,7 @@
       },
       "get": {
         "tags": [
-          "operate"
+          "route"
         ],
         "summary": "query user operate route record",
         "description": "",
