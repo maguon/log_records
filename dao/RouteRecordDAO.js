@@ -14,7 +14,7 @@ const getRouteRecord = (params,callback)=>{
     if(params.recordId){
         query.where('_id').equals(params.recordId);
     }
-    if(params.carId){
+    if(params.routeId){
         query.where('id').equals(params.routeId);
     }
     if(params.start&&params.size){
