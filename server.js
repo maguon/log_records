@@ -14,6 +14,7 @@ const operateRecord = require('./bl/OperateRecord');
 const truck = require('./bl/Truck');
 const userBl = require('./bl/UserBl');
 const routeRecord = require('./bl/RouteRecord');
+const damage = require('./bl/Damage');
 
 ///--- API
 
@@ -106,6 +107,10 @@ function createServer() {
 
     server.get('/api/routeRecord',routeRecord.getRouteRecords);
     server.post({path:'/api/routeRecord',contentType: 'application/json'} ,routeRecord.saveRouteRecord);
+
+    server.get('/api/damageRecord',damage.getDamageRecords);
+    server.post({path:'/api/user/:userId/damage/:damageId',contentType: 'application/json'} ,damage.createDamageRecord);
+    server.post({path:'/api/user/:userId/damage/:damageId/image',contentType: 'application/json'} ,damage.saveDamageImage);
 
 
 

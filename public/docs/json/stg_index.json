@@ -54,6 +54,14 @@
         "url" : "stg.myxxjs.com:9004",
         "description": "query route task record info"
       }
+    },
+    {
+      "name": "damage",
+      "description": "damage record",
+      "externalDocs": {
+        "url" : "stg.myxxjs.com:9004",
+        "description": "query car damage record info"
+      }
     }
   ],
   "schemes": [
@@ -736,7 +744,7 @@
       },
       "get": {
         "tags": [
-          "route"
+          "operate"
         ],
         "summary": "query user operate route record",
         "description": "",
@@ -777,6 +785,150 @@
           }
         }
       }
+    },
+    "/damageRecord": {
+      "get": {
+        "tags": [
+          "damage"
+        ],
+        "summary": "query car damage record",
+        "description": "",
+        "operationId": "getDamageRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "recordId",
+            "in": "query",
+            "description": "record unique id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "damageId",
+            "in": "query",
+            "description": "damage unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start pos for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "query size for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/damage/{damageId}/image": {
+      "post": {
+        "tags": [
+          "damage"
+        ],
+        "summary": "uploads car damage image",
+        "description": "",
+        "operationId": "saveDamageImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "damageId",
+            "in": "path",
+            "description": "car damage unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/damage/{damageId}": {
+      "post": {
+        "tags": [
+          "damage"
+        ],
+        "summary": "create car damage reacord",
+        "description": "",
+        "operationId": "saveDamageRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "damageID",
+            "in": "path",
+            "description": "damage unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "damageRecord",
+            "in": "body",
+            "description": "record info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/damageRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -793,6 +945,23 @@
           "type": "integer"
         },
         "url": {
+          "type": "string"
+        }
+      }
+    },
+    "damageRecord": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "content": {
+          "type": "string"
+        },
+        "vin": {
           "type": "string"
         }
       }
@@ -858,7 +1027,7 @@
         "routeId": {
           "type": "integer"
         },
-        "content": {
+        "comment": {
           "type": "string"
         }
       }
