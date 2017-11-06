@@ -14,7 +14,7 @@ const getDamageRecord = (params,callback)=>{
     if(params.recordId){
         query.where('_id').equals(params.recordId);
     }
-    if(params.carId){
+    if(params.damageId){
         query.where('id').equals(params.damageId);
     }
     if(params.status){
