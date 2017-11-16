@@ -111,6 +111,7 @@ function createServer() {
     server.get('/api/damageRecord',damage.getDamageRecords);
     server.post({path:'/api/user/:userId/damage/:damageId',contentType: 'application/json'} ,damage.createDamageRecord);
     server.post({path:'/api/user/:userId/damage/:damageId/image',contentType: 'application/json'} ,damage.saveDamageImage);
+    server.del('/api/user/:userId/record/:recordId/damageImage/:url',damage.removeDamageImage);
 
 
 

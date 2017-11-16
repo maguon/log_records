@@ -929,6 +929,50 @@
           }
         }
       }
+    },
+    "/user/{userId}/record/{recordId}/damageImage/{url}": {
+      "delete": {
+        "tags": [
+          "damage"
+        ],
+        "summary": "remove a  car damage image",
+        "description": "",
+        "operationId": "removeDamageImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "car record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "damage image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {

@@ -47,6 +47,20 @@ const createDamageRecord = (req,res,next) => {
         }
     })
 }
+
+const removeDamageImage = (req,res,next) =>{
+    let params = req.params;
+    damageDAO.removeDamageImage(params,(error,result)=>{
+        if (error) {
+            logger.error(' removeDamageImage ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' removeDamageImage ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
 module.exports = {
-    getDamageRecords ,saveDamageImage ,createDamageRecord
+    getDamageRecords ,saveDamageImage ,createDamageRecord ,removeDamageImage
 }

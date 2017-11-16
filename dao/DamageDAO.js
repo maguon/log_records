@@ -55,4 +55,42 @@ const saveDamageRecord =(params,callback)=>{
     })
 }
 
-module.exports = {getDamageRecord,saveDamageImage,saveDamageRecord};
+const removeDamageImage = (params,callback) => {
+    const recordId = params.recordId;
+    const url = params.url;
+    try{
+        recordModel.findById(recordId).then((doc)=> {
+            let index =-1;
+            if(doc &&doc.damage_image ){
+                for(var i =0;i<doc.damage_image.length;i++){
+                    if(doc.damage_image[i].url == url){
+                        if(doc.damage_image.length>1){
+                            doc.damage_image.splice(i,1);
+                        }else{
+                            doc.damage_image =[];
+                        }
+                        break;
+                    }
+                }
+                doc.save().then(doc=>{
+                    callback(null,doc)
+                }).catch((error)=>{
+                    callback(error,null)
+                })
+            }else{
+                callback(null,[])
+            }
+
+            //callback(null,doc)
+        }).catch((error)=>{
+            //console.log(error.stack);
+            callback(error,null)
+        })
+    }catch (e){
+        callback(e,null)
+    }
+
+}
+
+
+module.exports = {getDamageRecord,saveDamageImage,saveDamageRecord,removeDamageImage};
