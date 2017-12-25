@@ -256,7 +256,7 @@
           {
             "name": "opRecord",
             "in": "body",
-            "description": "op{11:import,12:moving,13:export} ",
+            "description": "op{10:qa,11:import,12:moving,13:export,14:load,15:arrived} ",
             "required": true,
             "schema": {
               "$ref": "#/definitions/opRecord"
@@ -286,7 +286,7 @@
           {
             "name": "op",
             "in": "query",
-            "description": "op{11:import,12:moving,13:export} ",
+            "description": "op{10:qa,11:import,12:moving,13:export,14:load,15:arrived} ",
             "required": false,
             "type": "integer"
           },
