@@ -15,6 +15,7 @@ const truck = require('./bl/Truck');
 const userBl = require('./bl/UserBl');
 const routeRecord = require('./bl/RouteRecord');
 const damage = require('./bl/Damage');
+const receiverRecord = require('./bl/ReceiverRecord');
 
 ///--- API
 
@@ -112,6 +113,11 @@ function createServer() {
     server.post({path:'/api/user/:userId/damage/:damageId',contentType: 'application/json'} ,damage.createDamageRecord);
     server.post({path:'/api/user/:userId/damage/:damageId/image',contentType: 'application/json'} ,damage.saveDamageImage);
     server.del('/api/user/:userId/record/:recordId/damageImage/:url',damage.removeDamageImage);
+
+    server.get('/api/receiverRecord',receiverRecord.getReceiverRecords());
+    server.post({path:'/api/user/:userId/receiver/:receiverId',contentType: 'application/json'} ,receiverRecord.saveReceiverRecord);
+    server.post({path:'/api/user/:userId/receiver/:receiverId/image',contentType: 'application/json'} ,receiverRecord.saveReceiverImage);
+    server.del('/api/user/:userId/record/:recordId/receiverImage/:url',receiverRecord.removeReceiverImage);
 
 
 

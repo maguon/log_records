@@ -43,7 +43,7 @@ const saveDamageImage =(params,callback)=>{
 }
 
 const saveDamageRecord =(params,callback)=>{
-    var operateObj = new recordModel({
+    let operateObj = new recordModel({
         id : params.damageId,
         vin : params.vin ,
         comment : params.comment,

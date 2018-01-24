@@ -45,4 +45,12 @@ const routeRecord = new Schema({
     created_on : {type:Date ,default : Date.now()}
 })
 
-module.exports = {carRecord,operateRecord,routeRecord,damageRecord}
+const receiverRecord = new Schema({
+    id:Number,
+    comment :{type:Array},
+    receiver_image:{type:Array},
+    status : Number,
+    created_on : {type:Date,default:Date.now()}
+})
+
+module.exports = {carRecord,operateRecord,routeRecord,damageRecord ,receiverRecord}

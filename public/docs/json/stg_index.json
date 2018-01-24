@@ -62,6 +62,14 @@
         "url" : "stg.myxxjs.com:9004",
         "description": "query car damage record info"
       }
+    },
+    {
+      "name": "receiver",
+      "description": "receiver record",
+      "externalDocs": {
+        "url" : "stg.myxxjs.com:9004",
+        "description": "operate a receiver record info"
+      }
     }
   ],
   "schemes": [
@@ -963,6 +971,194 @@
             "name": "url",
             "in": "path",
             "description": "damage image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/receiverRecord": {
+      "get": {
+        "tags": [
+          "receiver"
+        ],
+        "summary": "query receiver record",
+        "description": "",
+        "operationId": "getReceiverRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "recordId",
+            "in": "query",
+            "description": "record unique id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "receiverId",
+            "in": "query",
+            "description": "receiver unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start pos for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "query size for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/receiver/{receiverId}/image": {
+      "post": {
+        "tags": [
+          "receiver"
+        ],
+        "summary": "uploads receiver image",
+        "description": "",
+        "operationId": "saveReceiverImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "receiverId",
+            "in": "path",
+            "description": "receiver unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/receiver/{receiverId}": {
+      "post": {
+        "tags": [
+          "receiver"
+        ],
+        "summary": "add a receiver record",
+        "description": "",
+        "operationId": "saveReceiverRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "receiverID",
+            "in": "path",
+            "description": "receiver unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "receiverRecord",
+            "in": "body",
+            "description": "record info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/record"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/record/{recordId}/receiverImage/{url}": {
+      "delete": {
+        "tags": [
+          "receiver"
+        ],
+        "summary": "remove a  receiver image",
+        "description": "",
+        "operationId": "removeReceiverImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "car record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "receiver image url",
             "required": true,
             "type":"string"
           }
