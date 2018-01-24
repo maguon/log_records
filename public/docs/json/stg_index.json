@@ -1032,6 +1032,36 @@
             "description": "successful operation"
           }
         }
+      },
+      "post": {
+        "tags": [
+          "receiver"
+        ],
+        "summary": "add a receiver operate record",
+        "description": "",
+        "operationId": "saveReceiverRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "record",
+            "in": "body",
+            "description": "receiver operate record",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/opRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
       }
     },
     "/user/{userId}/receiver/{receiverId}/image": {
@@ -1070,52 +1100,6 @@
             "required": true,
             "schema": {
               "$ref": "#/definitions/image"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation"
-          }
-        }
-      }
-    },
-    "/user/{userId}/receiver/{receiverId}": {
-      "post": {
-        "tags": [
-          "receiver"
-        ],
-        "summary": "add a receiver record",
-        "description": "",
-        "operationId": "saveReceiverRecord",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "userId",
-            "in": "path",
-            "description": "user unique id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "receiverID",
-            "in": "path",
-            "description": "receiver unique id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "receiverRecord",
-            "in": "body",
-            "description": "record info",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/record"
             }
           }
         ],

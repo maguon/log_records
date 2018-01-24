@@ -114,8 +114,8 @@ function createServer() {
     server.post({path:'/api/user/:userId/damage/:damageId/image',contentType: 'application/json'} ,damage.saveDamageImage);
     server.del('/api/user/:userId/record/:recordId/damageImage/:url',damage.removeDamageImage);
 
-    server.get('/api/receiverRecord',receiverRecord.getReceiverRecords());
-    server.post({path:'/api/user/:userId/receiver/:receiverId',contentType: 'application/json'} ,receiverRecord.saveReceiverRecord);
+    server.get('/api/receiverRecord',receiverRecord.getReceiverRecords);
+    server.post({path:'/api/receiverRecord',contentType: 'application/json'} ,receiverRecord.saveReceiverRecord);
     server.post({path:'/api/user/:userId/receiver/:receiverId/image',contentType: 'application/json'} ,receiverRecord.saveReceiverImage);
     server.del('/api/user/:userId/record/:recordId/receiverImage/:url',receiverRecord.removeReceiverImage);
 
