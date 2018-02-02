@@ -9,6 +9,8 @@ const truckInfoModel = mongoose.model('truck_info', truckInfoEntity);
 const opTruckModel = mongoose.model('truck_op', opTruckEntity);
 const serverLogger = require('../util/ServerLogger.js');
 const logger = serverLogger.createLogger('TruckDAO.js');
+const truckDamageRecord = require('./schema/RecordsSchema.js').truckDamageRecord ;
+const recordModel = mongoose.model('truck_damage_record', truckDamageRecord);
 
 
 const getTruckGps = (params,callback)=>{
@@ -152,7 +154,90 @@ const saveOperateTruckRecord =(params,callback)=>{
         callback(error,result);
     })
 }
+
+
+const getTruckDamageRecord = (params,callback)=>{
+
+    let query = recordModel.find({}).select('_id vhe_no id damage_image comment status created_on');
+    if(params.recordId){
+        query.where('_id').equals(params.recordId);
+    }
+    if(params.truckDamageId){
+        query.where('id').equals(params.damageId);
+    }
+    if(params.status){
+        query.where('status').equals(params.status);
+    }
+    if(params.vheNo){
+        var regString = new RegExp(params.vheNo);
+        query.or([{vhe_no:regString}])
+    }
+    if(params.start&&params.size){
+        query.skip(parseInt(params.start)).limit(parseInt(params.size));
+    }
+    query.sort('-created_on').exec((err,rows)=>{
+        logger.debug(' getTruckDamageRecord ') ;
+        callback(err,rows);
+    })
+}
+const saveTruckDamageImage =(params,callback)=>{
+
+    const query = {id:params.truckDamageId ,vhe_no:params.vheNo};
+    const update = { $push: { damage_image: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()} }}
+    recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+        logger.debug(' saveTruckDamageImage ') ;
+        callback(error,result);
+    })
+}
+
+const saveTruckDamageRecord =(params,callback)=>{
+    let operateObj = new recordModel({
+        id : params.truckDamageId,
+        vhe_no : params.vheNo ,
+        comment : params.comment,
+        created_on : Date.now()
+    })
+    operateObj.save(function(error,result){
+        logger.debug('saveTruckDamageRecord') ;
+        callback(error,result);
+    })
+}
+
+const removeTruckDamageImage = (params,callback) => {
+    const recordId = params.recordId;
+    const url = params.url;
+    try{
+        recordModel.findById(recordId).then((doc)=> {
+            let index =-1;
+            if(doc &&doc.damage_image ){
+                for(var i =0;i<doc.damage_image.length;i++){
+                    if(doc.damage_image[i].url == url){
+                        if(doc.damage_image.length>1){
+                            doc.damage_image.splice(i,1);
+                        }else{
+                            doc.damage_image =[];
+                        }
+                        break;
+                    }
+                }
+                doc.save().then(doc=>{
+                    callback(null,doc)
+                }).catch((error)=>{
+                    callback(error,null)
+                })
+            }else{
+                callback(null,[])
+            }
+        }).catch((error)=>{
+            callback(error,null)
+        })
+    }catch (e){
+        callback(e,null)
+    }
+
+}
 module.exports = {
     getTruckGps ,getTruckRecords , saveTruckImage ,saveTruckRecord ,removeTruckImage ,
-    getOperateTruckRecord , saveOperateTruckRecord
+    getOperateTruckRecord , saveOperateTruckRecord ,
+    getTruckDamageRecord ,saveTruckDamageImage ,saveTruckDamageRecord ,removeTruckDamageImage
 }

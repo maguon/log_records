@@ -881,7 +881,7 @@
             "description": "image info",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/image"
+              "$ref": "#/definitions/damageImage"
             }
           }
         ],
@@ -971,6 +971,194 @@
             "name": "url",
             "in": "path",
             "description": "damage image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/truckDamageRecord": {
+      "get": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "query truck damage record",
+        "description": "",
+        "operationId": "getTruckDamageRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "recordId",
+            "in": "query",
+            "description": "record unique id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "truckDamageId",
+            "in": "query",
+            "description": "truck damage unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start pos for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "query size for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/truckDamage/{truckDamageId}/image": {
+      "post": {
+        "tags": [
+          "damage"
+        ],
+        "summary": "uploads truck damage image",
+        "description": "",
+        "operationId": "saveTruckDamageImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "truckDamageId",
+            "in": "path",
+            "description": "truck damage unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/truckDamageImage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/truckDamage/{truckDamageId}": {
+      "post": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "create truck damage reacord",
+        "description": "",
+        "operationId": "saveDamageRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "truckDamageID",
+            "in": "path",
+            "description": "damage unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "truckDamageRecord",
+            "in": "body",
+            "description": "record info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/truckDamageRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/record/{recordId}/truckDamageImage/{url}": {
+      "delete": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "remove a  truck damage image",
+        "description": "",
+        "operationId": "removeTruckDamageImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "car record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "truck damage image url",
             "required": true,
             "type":"string"
           }
@@ -1173,6 +1361,46 @@
         }
       }
     },
+    "damageImage": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "vin": {
+          "type": "string"
+        }
+      }
+    },
+    "truckDamageImage": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "vheNo": {
+          "type": "string"
+        }
+      }
+    },
     "damageRecord": {
       "type": "object",
       "properties": {
@@ -1186,6 +1414,23 @@
           "type": "string"
         },
         "vin": {
+          "type": "string"
+        }
+      }
+    },
+    "truckDamageRecord": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "content": {
+          "type": "string"
+        },
+        "vheNo": {
           "type": "string"
         }
       }

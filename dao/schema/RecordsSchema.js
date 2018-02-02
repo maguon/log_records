@@ -53,4 +53,12 @@ const receiverRecord = new Schema({
     created_on : {type:Date,default:Date.now()}
 })
 
-module.exports = {carRecord,operateRecord,routeRecord,damageRecord ,receiverRecord}
+const truckDamageRecord = new Schema({
+    vhe_no : String,
+    id : Number ,
+    damage_image: {type: Array},
+    comment : {type: Array},
+    status : Number,
+    created_on : {type:Date ,default : Date.now()}
+});
+module.exports = {carRecord,operateRecord,routeRecord,damageRecord ,receiverRecord ,truckDamageRecord}

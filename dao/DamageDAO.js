@@ -34,7 +34,7 @@ const getDamageRecord = (params,callback)=>{
 }
 const saveDamageImage =(params,callback)=>{
 
-    const query = {id:params.damageId};
+    const query = {id:params.damageId ,vin:params.vin};
     const update = { $push: { damage_image: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()} }}
     recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
         logger.debug(' saveDamageImage ') ;
