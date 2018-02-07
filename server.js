@@ -119,6 +119,10 @@ function createServer() {
     server.post({path:'/api/user/:userId/receiver/:receiverId/image',contentType: 'application/json'} ,receiverRecord.saveReceiverImage);
     server.del('/api/user/:userId/record/:recordId/receiverImage/:url',receiverRecord.removeReceiverImage);
 
+    server.get('/api/truckDamage',truck.getTruckDamageRecords);
+    server.post({path:'/api/user/:userId/truckDamage/:truckDamageId',contentType: 'application/json'} ,truck.createTruckDamageRecord);
+    server.post({path:'/api/user/:userId/truckDamage/:truckDamageId/image',contentType: 'application/json'} ,truck.saveTruckDamageImage);
+    server.del('/api/user/:userId/record/:recordId/truckDamageImage/:url',truck.removeTruckDamageImage);
 
 
 

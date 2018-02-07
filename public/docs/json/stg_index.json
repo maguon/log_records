@@ -1037,7 +1037,7 @@
     "/user/{userId}/truckDamage/{truckDamageId}/image": {
       "post": {
         "tags": [
-          "damage"
+          "truck"
         ],
         "summary": "uploads truck damage image",
         "description": "",
