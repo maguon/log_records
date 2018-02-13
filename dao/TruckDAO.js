@@ -163,7 +163,7 @@ const getTruckDamageRecord = (params,callback)=>{
         query.where('_id').equals(params.recordId);
     }
     if(params.truckDamageId){
-        query.where('id').equals(params.damageId);
+        query.where('id').equals(params.truckDamageId);
     }
     if(params.status){
         query.where('status').equals(params.status);
