@@ -982,7 +982,7 @@
         }
       }
     },
-    "/truckDamageRecord": {
+    "/truckDamage": {
       "get": {
         "tags": [
           "truck"
