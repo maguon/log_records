@@ -264,7 +264,7 @@
           {
             "name": "opRecord",
             "in": "body",
-            "description": "op{10:qa,11:import,12:moving,13:export,14:load,15:arrived} ",
+            "description": "op{10:qa,11:import,12:moving,13:export,14:load,15:arrived,21:car_key} ",
             "required": true,
             "schema": {
               "$ref": "#/definitions/opRecord"
