@@ -13,6 +13,7 @@ const carRecord = new Schema({
     vin : String,
     id : Number ,
     storage_image: {type: Array},
+    video: {type: Array},
     comment : {type: Array},
     status : Number,
     created_on : {type:Date ,default : Date.now()}

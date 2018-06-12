@@ -46,6 +46,16 @@ const saveStorageImage =(params,callback)=>{
     })
 }
 
+const saveVideo =(params,callback)=>{
+
+    const query = {id:params.carId,vin:params.vin};
+    const update = { video: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()}}
+    recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+        logger.debug(' saveVideo ') ;
+        callback(error,result);
+    })
+}
+
 const saveRecord =(params,callback)=>{
 
     const query = {id:params.carId,vin:params.vin};
@@ -94,5 +104,5 @@ const removeStorageImage = (params,callback) => {
 }
 
 module.exports = {
-    getCarRecords ,saveStorageImage,saveRecord,removeStorageImage
+    getCarRecords ,saveStorageImage,saveRecord,removeStorageImage , saveVideo
 }

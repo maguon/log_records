@@ -89,6 +89,7 @@ function createServer() {
     server.get('/api/user/:userId/car/:carId/record',carRecord.getCarRecords);
     server.del('/api/user/:userId/record/:recordId/image/:url',carRecord.removeCarImage);
     server.post({path:'/api/car/:carId/vin/:vin/storageImage',contentType: 'application/json'} ,carRecord.saveStorageImage);
+    server.post({path:'/api/car/:carId/vin/:vin/video',contentType: 'application/json'} ,carRecord.saveVideo);
     server.post({path:'/api/car/:carId/vin/:vin/record',contentType: 'application/json'} ,carRecord.saveRecord);
     server.get('/api/opRecord',operateRecord.getOperateRecord);
     server.post({path:'/api/opRecord',contentType: 'application/json'} ,operateRecord.saveOperateRecord);

@@ -41,6 +41,20 @@ const saveStorageImage = (req,res,next) =>{
     })
 }
 
+const saveVideo = (req,res,next) =>{
+    let params = req.params;
+    carRecordDAO.saveVideo(params,(error,result)=>{
+        if (error) {
+            logger.error(' saveVideo ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' saveVideo ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+
 const saveRecord = (req,res,next) =>{
     let params = req.params;
     params.comment = params.content;
@@ -75,4 +89,4 @@ const removeCarImage = (req,res,next) =>{
     })
 }
 
-module.exports = {getCarRecords,saveStorageImage,saveRecord,removeCarImage};
+module.exports = {getCarRecords,saveStorageImage,saveRecord,removeCarImage,saveVideo};
