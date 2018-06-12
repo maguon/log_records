@@ -13,7 +13,7 @@ const recordModel = mongoose.model('car_record', carRecord);
 
 const getCarRecords = (params,callback)=>{
 
-    let query = recordModel.find({}).select('_id vin id storage_image comment status created_on');
+    let query = recordModel.find({}).select('_id vin id storage_image video comment status created_on');
     if(params.recordId){
         query.where('_id').equals(params.recordId);
     }
@@ -49,7 +49,7 @@ const saveStorageImage =(params,callback)=>{
 const saveVideo =(params,callback)=>{
 
     const query = {id:params.carId,vin:params.vin};
-    const update = { video: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()}}
+    const update = { $set:{video: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()}}}
     recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
         logger.debug(' saveVideo ') ;
         callback(error,result);
