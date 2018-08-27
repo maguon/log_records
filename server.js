@@ -16,6 +16,7 @@ const userBl = require('./bl/UserBl');
 const routeRecord = require('./bl/RouteRecord');
 const damage = require('./bl/Damage');
 const receiverRecord = require('./bl/ReceiverRecord');
+const entrustRecord = require('./bl/EntrustRecord');
 
 ///--- API
 
@@ -125,6 +126,8 @@ function createServer() {
     server.post({path:'/api/user/:userId/truckDamage/:truckDamageId/image',contentType: 'application/json'} ,truck.saveTruckDamageImage);
     server.del('/api/user/:userId/record/:recordId/truckDamageImage/:url',truck.removeTruckDamageImage);
 
+    server.get('/api/entrustRecord',entrustRecord.getEntrustRecord);
+    server.post({path:'/api/entrust/:entrustId/cityRouteId/:cityRouteId/entrustRecord',contentType: 'application/json'} ,entrustRecord.saveEntrustRecord);
 
 
     server.on('NotFound', function (req, res, next) {

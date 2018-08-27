@@ -70,6 +70,14 @@
         "url" : "stg.myxxjs.com:9004",
         "description": "operate a receiver record info"
       }
+    },
+    {
+      "name": "entrust",
+      "description": "entrust record",
+      "externalDocs": {
+        "url" : "stg.myxxjs.com:9004",
+        "description": "operate a entrust record info"
+      }
     }
   ],
   "schemes": [
@@ -1387,6 +1395,112 @@
           }
         }
       }
+    },
+    "/entrustRecord": {
+      "get": {
+        "tags": [
+          "entrust"
+        ],
+        "summary": "query entrust record",
+        "description": "",
+        "operationId": "getEntrustRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "query",
+            "description": "record unique id",
+            "required": false,
+            "type": "string"
+          },
+
+          {
+            "name": "entrustId",
+            "in": "query",
+            "description": "entrust unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "cityRouteId",
+            "in": "query",
+            "description": "city route unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start pos for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "query size for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/entrust/{entrustId}/cityRouteId/{cityRouteId}/entrustRecord": {
+      "post": {
+        "tags": [
+          "entrust"
+        ],
+        "summary": "add a entrust operate record",
+        "description": "",
+        "operationId": "saveEntrustRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+
+        "parameters": [
+          {
+            "name": "entrustId",
+            "in": "path",
+            "description": "entrust unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "cityRouteId",
+            "in": "path",
+            "description": "city route unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "record",
+            "in": "body",
+            "description": "entrust operate record",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/entrustRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1546,6 +1660,30 @@
           "type": "string"
         }
       }
+    },
+    "entrustRecord":{
+      "type": "object",
+      "properties": {
+        "entrustId": {
+          "type": "integer"
+        },
+        "cityRouteId": {
+          "type": "integer"
+        },
+        "username": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "content": {
+          "type": "integer"
+        }
+      }
+
     }
   }
 
