@@ -9,7 +9,7 @@
         "Promise" : "1.0.5" ,
         "posix-getopt": "1.0.0",
         "request": "*",
-        "restify": "4.3.0",
+        "restify": "4.3.4",
         "restify-errors" :"4.3.0",
         "restify-plugins" :"1.5.1"
     },
