@@ -448,16 +448,16 @@
           {
             "name": "startDate",
             "in": "query",
-            "description": "operate start date",
+            "description": "operate start date 2016-01-01",
             "required": false,
-            "type": "integer"
+            "type": "string"
           },
           {
-            "name": "end",
+            "name": "endDate",
             "in": "query",
-            "description": "operate end date",
+            "description": "operate end date 2016-01-31",
             "required": false,
-            "type": "integer"
+            "type": "string"
           }
         ],
         "responses": {

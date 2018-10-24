@@ -45,27 +45,41 @@ const getOperateRecord = (params,callback)=>{
 }
 
 const getOpRecordStat = (params,callback) =>{
-    let query = recordModel.find({}).count();
+
+    let aggregate = recordModel.aggregate();
+    let matchQuery = {};
+    let dateQuery = {};
+    let dateTmp ={}
+
 
     if(params.op){
-        query.where('op').equals(params.op);
+        matchQuery.op = parseInt(params.op);
     }
     if(params.userId){
-        query.where('userId').equals(params.userId);
+        matchQuery.userId = parseInt(params.userId);
     }
     if(params.userType){
-        query.where('userType').equals(params.userType);
+        matchQuery.userType = parseInt(params.userType);
     }
     if(params.startDate){
-        query.where('created_on').gte(startDate);
+        dateQuery.$gte = new Date(params.startDate+ " 00:00:00");
     }
     if(params.endDate){
-        query.where('created_on').lte(endDate);
+        dateQuery.$lte = new Date(params.endDate);
     }
-    query.exec((err,rows)=>{
+    if(dateQuery.$gte!=null || dateQuery.$lte!=null){
+        matchQuery.created_on = dateQuery;
+
+    }
+    //matchQuery.created_on = {$lte:new Date('2018-10-30')}
+    aggregate.match(matchQuery).group({ _id:{userId:"$userId" ,username:'$username'},opCount:{$sum: 1}}).exec((err,rows)=>{
         logger.debug(' getOpRecordStat ') ;
         callback(err,rows);
     })
+    /*query.exec((err,rows)=>{
+        logger.debug(' getOpRecordStat ') ;
+        callback(err,rows);
+    })*/
 }
 const saveOperateRecord =(params,callback)=>{
 
