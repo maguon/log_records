@@ -432,6 +432,13 @@
             "type": "integer"
           },
           {
+            "name": "ops",
+            "in": "query",
+            "description": "op array 10,11,12",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "userId",
             "in": "query",
             "description": "user unique id ",

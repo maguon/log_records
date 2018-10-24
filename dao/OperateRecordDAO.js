@@ -49,11 +49,18 @@ const getOpRecordStat = (params,callback) =>{
     let aggregate = recordModel.aggregate();
     let matchQuery = {};
     let dateQuery = {};
-    let dateTmp ={}
 
 
     if(params.op){
         matchQuery.op = parseInt(params.op);
+    }
+    if(params.ops){
+        let opsArray = params.ops.split(',');
+        let opsParams = []
+        opsArray.map((v)=>{
+            opsParams.push(parseInt(v))
+        })
+        matchQuery.op = {$in:opsParams};
     }
     if(params.userId){
         matchQuery.userId = parseInt(params.userId);
