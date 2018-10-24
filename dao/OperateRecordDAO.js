@@ -43,6 +43,30 @@ const getOperateRecord = (params,callback)=>{
         callback(err,rows);
     })
 }
+
+const getOpRecordStat = (params,callback) =>{
+    let query = recordModel.find({}).count();
+
+    if(params.op){
+        query.where('op').equals(params.op);
+    }
+    if(params.userId){
+        query.where('userId').equals(params.userId);
+    }
+    if(params.userType){
+        query.where('userType').equals(params.userType);
+    }
+    if(params.startDate){
+        query.where('created_on').gte(startDate);
+    }
+    if(params.endDate){
+        query.where('created_on').lte(endDate);
+    }
+    query.exec((err,rows)=>{
+        logger.debug(' getOpRecordStat ') ;
+        callback(err,rows);
+    })
+}
 const saveOperateRecord =(params,callback)=>{
 
     var operateObj = new recordModel({
@@ -60,4 +84,4 @@ const saveOperateRecord =(params,callback)=>{
         callback(error,result);
     })
 }
-module.exports = {getOperateRecord,saveOperateRecord};
+module.exports = {getOperateRecord,saveOperateRecord ,getOpRecordStat};

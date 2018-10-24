@@ -97,6 +97,7 @@ function createServer() {
     server.post({path:'/api/car/:carId/vin/:vin/video',contentType: 'application/json'} ,carRecord.saveVideo);
     server.post({path:'/api/car/:carId/vin/:vin/record',contentType: 'application/json'} ,carRecord.saveRecord);
     server.get('/api/opRecord',operateRecord.getOperateRecord);
+    server.get('/api/opRecordStat',operateRecord.getOperateRecordStat);
     server.post({path:'/api/opRecord',contentType: 'application/json'} ,operateRecord.saveOperateRecord);
 
     server.get('/api/user/:userId/truckGps',truck.getTruckGps);

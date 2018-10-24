@@ -24,6 +24,20 @@ const  getOperateRecord =  (req,res,next) => {
     })
 }
 
+const  getOperateRecordStat =  (req,res,next) => {
+    var params = req.params;
+    operateRecordDAO.getOpRecordStat(params,(error,result)=>{
+        if (error) {
+            logger.error(' getOperateRecordStat ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' getOperateRecordStat ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+
 const saveOperateRecord = (req,res,next) =>{
     var params = req.params;
     operateRecordDAO.saveOperateRecord(params,(error,result)=>{
@@ -38,4 +52,4 @@ const saveOperateRecord = (req,res,next) =>{
     })
 }
 
-module.exports ={getOperateRecord ,saveOperateRecord}
+module.exports ={getOperateRecord ,saveOperateRecord ,getOperateRecordStat}

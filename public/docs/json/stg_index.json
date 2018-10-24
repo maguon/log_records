@@ -409,6 +409,64 @@
         }
       }
     },
+    "/opRecordStat": {
+      "get": {
+        "tags": [
+          "operate"
+        ],
+        "summary": "query user operate record stat",
+        "description": "",
+        "operationId": "getOperateRecordStat",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "op",
+            "in": "query",
+            "description": "op{10:qa,11:import,12:moving,13:export,14:load,15:arrived} ",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "user unique id ",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "userType",
+            "in": "query",
+            "description": "operate user type ",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "operate start date",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "end",
+            "in": "query",
+            "description": "operate end date",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/user/{userId}/truckGps": {
       "get": {
         "tags": [
