@@ -72,7 +72,7 @@ const getOpRecordStat = (params,callback) =>{
         dateQuery.$gte = new Date(params.startDate+ " 00:00:00");
     }
     if(params.endDate){
-        dateQuery.$lte = new Date(params.endDate);
+        dateQuery.$lte = new Date(params.endDate + " 23:59:59");
     }
     if(dateQuery.$gte!=null || dateQuery.$lte!=null){
         matchQuery.created_on = dateQuery;
