@@ -15,6 +15,7 @@ const truck = require('./bl/Truck');
 const userBl = require('./bl/UserBl');
 const routeRecord = require('./bl/RouteRecord');
 const damage = require('./bl/Damage');
+const check = require('./bl/CheckCar');
 const receiverRecord = require('./bl/ReceiverRecord');
 const entrustRecord = require('./bl/EntrustRecord');
 
@@ -121,6 +122,11 @@ function createServer() {
     server.post({path:'/api/user/:userId/damage/:damageId/image',contentType: 'application/json'} ,damage.saveDamageImage);
     server.del('/api/user/:userId/record/:recordId/damageImage/:url',damage.removeDamageImage);
 
+    server.get('/api/check',check.getCheckRecord);
+    server.post({path:'/api/user/:userId/check/:checkId',contentType: 'application/json'} ,check.createCheckRecord);
+    server.post({path:'/api/user/:userId/check/:checkId/image',contentType: 'application/json'} ,check.saveCheckImage);
+    server.del('/api/user/:userId/record/:recordId/checkImage/:url',check.removeCheckImage);
+
     server.get('/api/receiverRecord',receiverRecord.getReceiverRecords);
     server.post({path:'/api/receiverRecord',contentType: 'application/json'} ,receiverRecord.saveReceiverRecord);
     server.post({path:'/api/user/:userId/receiver/:receiverId/image',contentType: 'application/json'} ,receiverRecord.saveReceiverImage);
@@ -130,6 +136,8 @@ function createServer() {
     server.post({path:'/api/user/:userId/truckDamage/:truckDamageId',contentType: 'application/json'} ,truck.createTruckDamageRecord);
     server.post({path:'/api/user/:userId/truckDamage/:truckDamageId/image',contentType: 'application/json'} ,truck.saveTruckDamageImage);
     server.del('/api/user/:userId/record/:recordId/truckDamageImage/:url',truck.removeTruckDamageImage);
+
+
 
     server.get('/api/entrustRecord',entrustRecord.getEntrustRecord);
     server.post({path:'/api/entrust/:entrustId/cityRouteId/:cityRouteId/entrustRecord',contentType: 'application/json'} ,entrustRecord.saveEntrustRecord);

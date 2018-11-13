@@ -19,7 +19,6 @@
       "name": "car",
       "description": "car operation records",
       "externalDocs": {
-        "url" : "stg.myxxjs.com:9004",
         "description": " records api"
       }
     },
@@ -27,7 +26,6 @@
       "name": "operate",
       "description": "user operation records",
       "externalDocs": {
-        "url" : "stg.myxxjs.com:9004",
         "description": " operate records api"
       }
     },
@@ -35,7 +33,6 @@
       "name": "truck",
       "description": "truck gps info",
       "externalDocs": {
-        "url" : "stg.myxxjs.com:9004",
         "description": " query truck gps and record api"
       }
     },
@@ -43,7 +40,6 @@
       "name": "tuser",
       "description": "target user  info",
       "externalDocs": {
-        "url" : "stg.myxxjs.com:9004",
         "description": " query target user record api"
       }
     },
@@ -51,7 +47,6 @@
       "name": "route",
       "description": "route task record",
       "externalDocs": {
-        "url" : "stg.myxxjs.com:9004",
         "description": "query route task record info"
       }
     },
@@ -59,15 +54,20 @@
       "name": "damage",
       "description": "damage record",
       "externalDocs": {
-        "url" : "stg.myxxjs.com:9004",
         "description": "query car damage record info"
+      }
+    },
+    {
+      "name": "check",
+      "description": "check car record",
+      "externalDocs": {
+        "description": "check car record for cu_api"
       }
     },
     {
       "name": "receiver",
       "description": "receiver record",
       "externalDocs": {
-        "url" : "stg.myxxjs.com:9004",
         "description": "operate a receiver record info"
       }
     },
@@ -75,7 +75,6 @@
       "name": "entrust",
       "description": "entrust record",
       "externalDocs": {
-        "url" : "stg.myxxjs.com:9004",
         "description": "operate a entrust record info"
       }
     }
@@ -400,71 +399,6 @@
             "description": "query size for pagination",
             "required": false,
             "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation"
-          }
-        }
-      }
-    },
-    "/opRecordStat": {
-      "get": {
-        "tags": [
-          "operate"
-        ],
-        "summary": "query user operate record stat",
-        "description": "",
-        "operationId": "getOperateRecordStat",
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "name": "op",
-            "in": "query",
-            "description": "op{10:qa,11:import,12:moving,13:export,14:load,15:arrived} ",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "ops",
-            "in": "query",
-            "description": "op array 10,11,12",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "userId",
-            "in": "query",
-            "description": "user unique id ",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "userType",
-            "in": "query",
-            "description": "operate user type ",
-            "required": false,
-            "type": "integer"
-          },
-          {
-            "name": "startDate",
-            "in": "query",
-            "description": "operate start date 2016-01-01",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "endDate",
-            "in": "query",
-            "description": "operate end date 2016-01-31",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1101,6 +1035,194 @@
         }
       }
     },
+    "/check": {
+      "get": {
+        "tags": [
+          "check"
+        ],
+        "summary": "query car check record",
+        "description": "",
+        "operationId": "getCheckRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "recordId",
+            "in": "query",
+            "description": "record unique id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "checkId",
+            "in": "query",
+            "description": "check car unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start pos for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "query size for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/check/{checkId}": {
+      "post": {
+        "tags": [
+          "check"
+        ],
+        "summary": "create check car reacord",
+        "description": "",
+        "operationId": "savecheckRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "checkId",
+            "in": "path",
+            "description": "damage unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "checkRecord",
+            "in": "body",
+            "description": "record info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/checkRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/check/{checkId}/image": {
+      "post": {
+        "tags": [
+          "check"
+        ],
+        "summary": "uploads car check image",
+        "description": "",
+        "operationId": "saveCheckImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "checkId",
+            "in": "path",
+            "description": "car check unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/checkImage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/record/{recordId}/checkImage/{url}": {
+      "delete": {
+        "tags": [
+          "check"
+        ],
+        "summary": "remove a  check car image",
+        "description": "",
+        "operationId": "removeCheckImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "car record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "check image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/truckDamage": {
       "get": {
         "tags": [
@@ -1606,6 +1728,26 @@
         }
       }
     },
+    "checkImage": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userId": {
+          "type": "integer"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "url": {
+          "type": "string"
+        },
+        "carNo": {
+          "type": "string"
+        }
+      }
+    },
     "truckDamageImage": {
       "type": "object",
       "properties": {
@@ -1639,6 +1781,23 @@
           "type": "string"
         },
         "vin": {
+          "type": "string"
+        }
+      }
+    },
+    "checkRecord": {
+      "type": "object",
+      "properties": {
+        "username": {
+          "type": "string"
+        },
+        "userType": {
+          "type": "integer"
+        },
+        "content": {
+          "type": "string"
+        },
+        "carNo": {
           "type": "string"
         }
       }
@@ -1703,6 +1862,64 @@
         },
         "comment": {
           "type": "string"
+        }
+      }
+    },
+    "/opRecordStat": {
+      "get": {
+        "tags": [
+          "operate"
+        ],
+        "summary": "query user operate record stat",
+        "description": "",
+        "operationId": "getOperateRecordStat",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "op",
+            "in": "query",
+            "description": "op{10:qa,11:import,12:moving,13:export,14:load,15:arrived} ",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "userId",
+            "in": "query",
+            "description": "user unique id ",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "userType",
+            "in": "query",
+            "description": "operate user type ",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "operate start date",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "operate end date",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
         }
       }
     },

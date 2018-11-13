@@ -28,6 +28,14 @@ const damageRecord = new Schema({
     created_on : {type:Date ,default : Date.now()}
 });
 
+const checkRecord = new Schema({
+    car_no : String,
+    id : Number ,
+    check_image: {type: Array},
+    comment : {type: Array},
+    status : Number,
+    created_on : {type:Date ,default : Date.now()}
+});
 const operateRecord = new Schema({
     userId:Number,
     username:String,
@@ -69,4 +77,4 @@ const entrustRecord  = new Schema({
     comment : {type:Array},
     created_on : {type:Date ,default : Date.now()}
 })
-module.exports = {carRecord,operateRecord,routeRecord,damageRecord ,receiverRecord ,truckDamageRecord ,entrustRecord}
+module.exports = {carRecord,operateRecord,routeRecord,damageRecord ,receiverRecord ,truckDamageRecord ,entrustRecord,checkRecord}
