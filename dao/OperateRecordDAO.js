@@ -31,6 +31,12 @@ const getOperateRecord = (params,callback)=>{
     if(params.userType){
         query.where('userType').equals(params.userType);
     }
+    if(params.startDate){
+        query.where('created_on').gte(params.startDate +" 00:00:00");
+    }
+    if(params.endDate){
+        query.where('created_on').lte(params.endDate + " 23:59:59");
+    }
     if(params.vin){
         var regString = new RegExp(params.vin);
         query.or([{vin:regString}])
@@ -38,6 +44,7 @@ const getOperateRecord = (params,callback)=>{
     if(params.start&&params.size){
         query.skip(parseInt(params.start)).limit(parseInt(params.size));
     }
+
     query.sort('-created_on').exec((err,rows)=>{
         logger.debug(' getOperateRecords ') ;
         callback(err,rows);

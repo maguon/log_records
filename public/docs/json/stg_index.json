@@ -387,6 +387,20 @@
             "type": "string"
           },
           {
+            "name": "startDate",
+            "in": "query",
+            "description": "op start date",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "op end date",
+            "required": false,
+            "type": "string"
+          },
+          {
             "name": "start",
             "in": "query",
             "description": "start pos for pagination",
