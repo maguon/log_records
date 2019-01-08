@@ -137,6 +137,10 @@ function createServer() {
     server.post({path:'/api/user/:userId/truckDamage/:truckDamageId/image',contentType: 'application/json'} ,truck.saveTruckDamageImage);
     server.del('/api/user/:userId/record/:recordId/truckDamageImage/:url',truck.removeTruckDamageImage);
 
+    server.get('/api/truckCheck',truck.getTruckCheckRecords);
+    server.post({path:'/api/user/:userId/truckCheck/:truckCheckId',contentType: 'application/json'} ,truck.createTruckCheckRecord);
+    server.post({path:'/api/user/:userId/truckCheck/:truckCheckId/image',contentType: 'application/json'} ,truck.saveTruckCheckImage);
+    server.del('/api/user/:userId/record/:recordId/truckCheckImage/:url',truck.removeTruckCheckImage);
 
 
     server.get('/api/entrustRecord',entrustRecord.getEntrustRecord);

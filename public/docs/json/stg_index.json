@@ -1425,6 +1425,194 @@
         }
       }
     },
+    "/truckCheck": {
+      "get": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "query truck check record",
+        "description": "",
+        "operationId": "getTruckCheckRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "recordId",
+            "in": "query",
+            "description": "record unique id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "truckCheckId",
+            "in": "query",
+            "description": "truck check unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start pos for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "query size for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/truckCheck/{truckCheckId}/image": {
+      "post": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "uploads truck check image",
+        "description": "",
+        "operationId": "saveTruckCheckImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "truckCheckId",
+            "in": "path",
+            "description": "truck check unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/truckDamageImage"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/truckCheck/{truckCheckId}": {
+      "post": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "create truck check reacord",
+        "description": "",
+        "operationId": "saveCheckRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "truckCheckID",
+            "in": "path",
+            "description": "check unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "truckCheckRecord",
+            "in": "body",
+            "description": "record info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/truckDamageRecord"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/record/{recordId}/truckCheckImage/{url}": {
+      "delete": {
+        "tags": [
+          "truck"
+        ],
+        "summary": "remove a  truck check image",
+        "description": "",
+        "operationId": "removeTruckCheckImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "car record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "truck damage image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/receiverRecord": {
       "get": {
         "tags": [

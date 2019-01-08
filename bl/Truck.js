@@ -139,7 +139,64 @@ const removeTruckDamageImage = (req,res,next) =>{
     })
 }
 
+const  getTruckCheckRecords =  (req,res,next) => {
+    let params = req.params;
+    truckDAO.getTruckDamageRecord(params,(error,result)=>{
+        if (error) {
+            logger.error(' getTruckCheckRecords ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' getTruckCheckRecords ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+const saveTruckCheckImage = (req,res,next) =>{
+    let params = req.params;
+    truckDAO.saveTruckCheckImage(params,(error,result)=>{
+        if (error) {
+            logger.error(' saveTruckCheckImage ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' saveTruckCheckImage ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+
+const createTruckCheckRecord = (req,res,next) => {
+    let params = req.params;
+    params.comment = [{id:params.userId,name:params.username,type:params.userType,content:params.content,timez: Date.now()}]
+    truckDAO.saveTruckCheckRecord(params,(error,result)=>{
+        if (error) {
+            logger.error(' createTruckCheckRecord ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' createTruckCheckRecord ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+
+const removeTruckCheckImage = (req,res,next) =>{
+    let params = req.params;
+    truckDAO.removeTruckCheckImage(params,(error,result)=>{
+        if (error) {
+            logger.error(' removeTruckCheckImage ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' removeTruckCheckImage ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+
 module.exports ={
     getTruckGps ,getTruckRecords ,saveTruckImage , saveTruckRecord , removeTruckImage ,
-    getTruckDamageRecords ,saveTruckDamageImage , createTruckDamageRecord ,removeTruckDamageImage
+    getTruckDamageRecords ,saveTruckDamageImage , createTruckDamageRecord ,removeTruckDamageImage ,
+    getTruckCheckRecords ,saveTruckCheckImage , createTruckCheckRecord ,removeTruckCheckImage
 }

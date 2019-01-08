@@ -77,4 +77,13 @@ const entrustRecord  = new Schema({
     comment : {type:Array},
     created_on : {type:Date ,default : Date.now()}
 })
-module.exports = {carRecord,operateRecord,routeRecord,damageRecord ,receiverRecord ,truckDamageRecord ,entrustRecord,checkRecord}
+
+const truckCheckRecord = new Schema({
+    vhe_no : String,
+    id : Number ,
+    check_image: {type: Array},
+    comment : {type: Array},
+    status : Number,
+    created_on : {type:Date ,default : Date.now()}
+});
+module.exports = {carRecord,operateRecord,routeRecord,damageRecord ,receiverRecord ,truckDamageRecord ,entrustRecord,checkRecord ,truckCheckRecord}
