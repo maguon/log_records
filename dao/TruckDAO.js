@@ -11,7 +11,8 @@ const serverLogger = require('../util/ServerLogger.js');
 const logger = serverLogger.createLogger('TruckDAO.js');
 const truckDamageRecord = require('./schema/RecordsSchema.js').truckDamageRecord ;
 const truckCheckRecord = require('./schema/RecordsSchema.js').truckCheckRecord ;
-const recordModel = mongoose.model('truck_check_record', truckCheckRecord);
+const checkRecordModel = mongoose.model('truck_check_record', truckCheckRecord);
+const recordModel = mongoose.model('truck_damage_record', truckCheckRecord);
 
 
 const getTruckGps = (params,callback)=>{
@@ -240,7 +241,7 @@ const removeTruckDamageImage = (params,callback) => {
 
 const getTruckCheckRecord = (params,callback)=>{
 
-    let query = recordModel.find({}).select('_id vhe_no id check_image comment status created_on');
+    let query = checkRecordModel.find({}).select('_id vhe_no id check_image comment status created_on');
     if(params.recordId){
         query.where('_id').equals(params.recordId);
     }
@@ -266,14 +267,14 @@ const saveTruckCheckImage =(params,callback)=>{
 
     const query = {id:params.truckCheckId ,vhe_no:params.vheNo};
     const update = { $push: { check_image: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()} }}
-    recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+    checkRecordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
         logger.debug(' saveTruckCheckImage ') ;
         callback(error,result);
     })
 }
 
 const saveTruckCheckRecord =(params,callback)=>{
-    let operateObj = new recordModel({
+    let operateObj = new checkRecordModel({
         id : params.truckCheckId,
         vhe_no : params.vheNo ,
         comment : params.comment,
@@ -289,7 +290,7 @@ const removeTruckCheckImage = (params,callback) => {
     const recordId = params.recordId;
     const url = params.url;
     try{
-        recordModel.findById(recordId).then((doc)=> {
+        checkRecordModel.findById(recordId).then((doc)=> {
             let index =-1;
             if(doc &&doc.check_image ){
                 for(var i =0;i<doc.check_image.length;i++){
