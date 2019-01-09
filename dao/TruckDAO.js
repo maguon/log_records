@@ -186,7 +186,7 @@ const saveTruckDamageImage =(params,callback)=>{
 
     const query = {id:params.truckDamageId ,vhe_no:params.vheNo};
     const update = { $push: { damage_image: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()} }}
-    recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+    recordModel.findOneAndUpdate(query,update,{upsert:true,new:true},function(error,result){
         logger.debug(' saveTruckDamageImage ') ;
         callback(error,result);
     })
@@ -267,7 +267,7 @@ const saveTruckCheckImage =(params,callback)=>{
 
     const query = {id:params.truckCheckId ,vhe_no:params.vheNo};
     const update = { $push: { check_image: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()} }}
-    checkRecordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+    checkRecordModel.findOneAndUpdate(query,update,{upsert:true,new:true},function(error,result){
         logger.debug(' saveTruckCheckImage ') ;
         callback(error,result);
     })
