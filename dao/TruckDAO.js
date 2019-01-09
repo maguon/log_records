@@ -12,7 +12,7 @@ const logger = serverLogger.createLogger('TruckDAO.js');
 const truckDamageRecord = require('./schema/RecordsSchema.js').truckDamageRecord ;
 const truckCheckRecord = require('./schema/RecordsSchema.js').truckCheckRecord ;
 const checkRecordModel = mongoose.model('truck_check_record', truckCheckRecord);
-const recordModel = mongoose.model('truck_damage_record', truckCheckRecord);
+const recordModel = mongoose.model('truck_damage_record', truckDamageRecord);
 
 
 const getTruckGps = (params,callback)=>{
