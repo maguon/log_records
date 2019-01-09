@@ -141,7 +141,7 @@ const removeTruckDamageImage = (req,res,next) =>{
 
 const  getTruckCheckRecords =  (req,res,next) => {
     let params = req.params;
-    truckDAO.getTruckDamageRecord(params,(error,result)=>{
+    truckDAO.getTruckCheckRecord(params,(error,result)=>{
         if (error) {
             logger.error(' getTruckCheckRecords ' + error.message);
             throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
