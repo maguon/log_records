@@ -10,7 +10,7 @@ const recordModel = mongoose.model('damage_record', damageRecord);
 
 const getDamageRecord = (params,callback)=>{
 
-    let query = recordModel.find({}).select('_id vin id damage_image comment status created_on');
+    let query = recordModel.find({}).select('_id vin id damage_image damage_video comment status created_on');
     if(params.recordId){
         query.where('_id').equals(params.recordId);
     }
@@ -38,6 +38,16 @@ const saveDamageImage =(params,callback)=>{
     const update = { $push: { damage_image: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()} }}
     recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
         logger.debug(' saveDamageImage ') ;
+        callback(error,result);
+    })
+}
+
+const saveDamageVideo =(params,callback)=>{
+
+    const query = {id:params.damageId ,vin:params.vin};
+    const update = { $set:{damage_video: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()}}};
+    recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+        logger.debug(' saveDamageVideo ') ;
         callback(error,result);
     })
 }
@@ -93,4 +103,4 @@ const removeDamageImage = (params,callback) => {
 }
 
 
-module.exports = {getDamageRecord,saveDamageImage,saveDamageRecord,removeDamageImage};
+module.exports = {getDamageRecord,saveDamageImage,saveDamageVideo ,saveDamageRecord,removeDamageImage};

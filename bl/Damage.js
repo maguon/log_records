@@ -32,6 +32,19 @@ const saveDamageImage = (req,res,next) =>{
         }
     })
 }
+const saveDamageVideo = (req,res,next) =>{
+    let params = req.params;
+    damageDAO.saveDamageVideo(params,(error,result)=>{
+        if (error) {
+            logger.error(' saveDamageVideo ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' saveDamageVideo ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
 
 const createDamageRecord = (req,res,next) => {
     let params = req.params;
@@ -62,5 +75,5 @@ const removeDamageImage = (req,res,next) =>{
     })
 }
 module.exports = {
-    getDamageRecords ,saveDamageImage ,createDamageRecord ,removeDamageImage
+    getDamageRecords ,saveDamageImage ,createDamageRecord ,removeDamageImage ,saveDamageVideo
 }

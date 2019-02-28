@@ -120,6 +120,7 @@ function createServer() {
     server.get('/api/damageRecord',damage.getDamageRecords);
     server.post({path:'/api/user/:userId/damage/:damageId',contentType: 'application/json'} ,damage.createDamageRecord);
     server.post({path:'/api/user/:userId/damage/:damageId/image',contentType: 'application/json'} ,damage.saveDamageImage);
+    server.post({path:'/api/user/:userId/damage/:damageId/video',contentType: 'application/json'} ,damage.saveDamageVideo);
     server.del('/api/user/:userId/record/:recordId/damageImage/:url',damage.removeDamageImage);
 
     server.get('/api/check',check.getCheckRecord);

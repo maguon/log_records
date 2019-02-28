@@ -23,6 +23,7 @@ const damageRecord = new Schema({
     vin : String,
     id : Number ,
     damage_image: {type: Array},
+    damage_video: {type: Array},
     comment : {type: Array},
     status : Number,
     created_on : {type:Date ,default : Date.now()}
