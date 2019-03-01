@@ -2131,7 +2131,7 @@
           {
             "name": "op",
             "in": "query",
-            "description": "op{10:qa,11:import,12:moving,13:export,14:load,15:arrived} ",
+            "description": "op{0:vin,1:create,10:qa,11:import,12:moving,13:export,14:load,15:arrived,16:settle,19:s_arrived} ",
             "required": false,
             "type": "integer"
           },
