@@ -28,6 +28,9 @@ const getOperateRecord = (params,callback)=>{
     if(params.userId){
         query.where('userId').equals(params.userId);
     }
+    if(params.makeId){
+        query.where('make_id').equals(params.makeId);
+    }
     if(params.userType){
         query.where('userType').equals(params.userType);
     }
@@ -100,6 +103,8 @@ const saveOperateRecord =(params,callback)=>{
     var operateObj = new recordModel({
         id : params.carId,
         vin : params.vin ,
+        make_id : params.makeId,
+        make_name : params.makeName,
         userId : params.userId,
         username : params.username,
         userType : params.userType,

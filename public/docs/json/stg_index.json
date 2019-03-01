@@ -2143,6 +2143,13 @@
             "type": "integer"
           },
           {
+            "name": "makeId",
+            "in": "query",
+            "description": "car make id ",
+            "required": false,
+            "type": "integer"
+          },
+          {
             "name": "userType",
             "in": "query",
             "description": "operate user type ",

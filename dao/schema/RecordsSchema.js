@@ -43,6 +43,8 @@ const operateRecord = new Schema({
     userType:Number,
     id:Number,
     vin:String,
+    make_id:Number,
+    make_name,String,
     op:Number,
     comment:String,
     created_on : {type:Date ,default : Date.now()}
