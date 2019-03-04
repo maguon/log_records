@@ -57,7 +57,9 @@ const saveVideo = (req,res,next) =>{
 
 const saveRecord = (req,res,next) =>{
     let params = req.params;
+
     params.comment = params.content;
+    console.log(params);
     operateRecordDAO.saveOperateRecord(params,(error,result)=>{
         if(error){
             logger.error(' saveOperateRecord ' + error.message);
