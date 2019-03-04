@@ -15,7 +15,7 @@ const recordModel = mongoose.model('op_record', operateRecord);
 
 const getOperateRecord = (params,callback)=>{
 
-    let query = recordModel.find({}).select('_id vin id userId username userType comment op created_on');
+    let query = recordModel.find({}).select('_id vin id userId username userType makeId makeName comment op created_on');
     if(params.recordId){
         query.where('_id').equals(params.recordId);
     }
