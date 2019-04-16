@@ -13,7 +13,7 @@ const recordModel = mongoose.model('car_record', carRecord);
 
 const getCarRecords = (params,callback)=>{
 
-    let query = recordModel.find({}).select('_id vin id storage_image video comment status created_on');
+    let query = recordModel.find({}).select('_id vin id car_image storage_image trans_image video comment status created_on');
     if(params.recordId){
         query.where('_id').equals(params.recordId);
     }
