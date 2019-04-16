@@ -133,7 +133,7 @@ const removeCarImage = (req,res,next) =>{
 
 const removeTransImage = (req,res,next) =>{
     let params = req.params;
-    carRecordDAO.removeCarImage(params,(error,result)=>{
+    carRecordDAO.removeTransImage(params,(error,result)=>{
         if (error) {
             logger.error(' removeTransImage ' + error.message);
             throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
