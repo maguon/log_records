@@ -163,6 +163,98 @@
         }
       }
     },
+    "/car/{carId}/vin/{vin}/carImage": {
+      "post": {
+        "tags": [
+          "car"
+        ],
+        "summary": "uploads car image",
+        "description": "",
+        "operationId": "saveCarImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "description": "car unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "vin",
+            "in": "path",
+            "description": "car unique vin code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/car/{carId}/vin/{vin}/transImage": {
+      "post": {
+        "tags": [
+          "car"
+        ],
+        "summary": "uploads car image",
+        "description": "",
+        "operationId": "saveTransImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "carId",
+            "in": "path",
+            "description": "car unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "vin",
+            "in": "path",
+            "description": "car unique vin code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
     "/car/{carId}/vin/{vin}/video": {
       "post": {
         "tags": [
@@ -209,14 +301,102 @@
         }
       }
     },
-    "/user/{userId}/record/{recordId}/image/{url}": {
+    "/user/{userId}/record/{recordId}/storageImage/{url}": {
+      "delete": {
+        "tags": [
+          "car"
+        ],
+        "summary": "remove a  car storage image",
+        "description": "",
+        "operationId": "removeStorageImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "car record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/record/{recordId}/carImage/{url}": {
       "delete": {
         "tags": [
           "car"
         ],
         "summary": "remove a  car image",
         "description": "",
-        "operationId": "removeStorageImage",
+        "operationId": "removeCarImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "car record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/record/{recordId}/transImage/{url}": {
+      "delete": {
+        "tags": [
+          "car"
+        ],
+        "summary": "remove a  car transportation image",
+        "description": "",
+        "operationId": "removeTransImage",
         "consumes": [
           "application/json"
         ],

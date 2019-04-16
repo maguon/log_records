@@ -46,6 +46,27 @@ const saveStorageImage =(params,callback)=>{
     })
 }
 
+const saveCarImage =(params,callback)=>{
+
+    const query = {id:params.carId,vin:params.vin};
+    const update = { $push: { car_image: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()} }}
+    recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+        logger.debug(' saveCarImage ') ;
+        callback(error,result);
+    })
+}
+
+const saveTransImage =(params,callback)=>{
+
+    const query = {id:params.carId,vin:params.vin};
+    const update = { $push: { trans_image: {url:params.url,id:params.userId,name:params.username,type:params.userType,timez: Date.now()} }}
+    recordModel.findOneAndUpdate(query,update,{upsert:true},function(error,result){
+        logger.debug(' saveTransImage ') ;
+        callback(error,result);
+    })
+}
+
+
 const saveVideo =(params,callback)=>{
 
     const query = {id:params.carId,vin:params.vin};
@@ -100,9 +121,81 @@ const removeStorageImage = (params,callback) => {
     }catch (e){
         callback(e,null)
     }
+}
 
+const removeCarImage = (params,callback) => {
+    const recordId = params.recordId;
+    const url = params.url;
+    try{
+        recordModel.findById(recordId).then((doc)=> {
+            let index =-1;
+            if(doc &&doc.car_image ){
+                for(var i =0;i<doc.car_image.length;i++){
+                    if(doc.car_image[i].url == url){
+                        if(doc.car_image.length>1){
+                            doc.car_image.splice(i,1);
+                        }else{
+                            doc.car_image =[];
+                        }
+                        break;
+                    }
+                }
+                doc.save().then(doc=>{
+                    callback(null,doc)
+                }).catch((error)=>{
+                    callback(error,null)
+                })
+            }else{
+                callback(null,[])
+            }
+
+            //callback(null,doc)
+        }).catch((error)=>{
+            //console.log(error.stack);
+            callback(error,null)
+        })
+    }catch (e){
+        callback(e,null)
+    }
+}
+
+const removeTransImage = (params,callback) => {
+    const recordId = params.recordId;
+    const url = params.url;
+    try{
+        recordModel.findById(recordId).then((doc)=> {
+            let index =-1;
+            if(doc &&doc.trans_image ){
+                for(var i =0;i<doc.trans_image.length;i++){
+                    if(doc.trans_image[i].url == url){
+                        if(doc.trans_image.length>1){
+                            doc.trans_image.splice(i,1);
+                        }else{
+                            doc.trans_image =[];
+                        }
+                        break;
+                    }
+                }
+                doc.save().then(doc=>{
+                    callback(null,doc)
+                }).catch((error)=>{
+                    callback(error,null)
+                })
+            }else{
+                callback(null,[])
+            }
+
+            //callback(null,doc)
+        }).catch((error)=>{
+            //console.log(error.stack);
+            callback(error,null)
+        })
+    }catch (e){
+        callback(e,null)
+    }
 }
 
 module.exports = {
-    getCarRecords ,saveStorageImage,saveRecord,removeStorageImage , saveVideo
+    getCarRecords ,saveStorageImage,saveCarImage ,saveTransImage, saveRecord,removeStorageImage , saveVideo ,
+    removeCarImage , removeTransImage
 }

@@ -41,6 +41,34 @@ const saveStorageImage = (req,res,next) =>{
     })
 }
 
+const saveCarImage = (req,res,next) =>{
+    let params = req.params;
+    carRecordDAO.saveCarImage(params,(error,result)=>{
+        if (error) {
+            logger.error(' saveCarImage ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' saveCarImage ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+
+const saveTransImage = (req,res,next) =>{
+    let params = req.params;
+    carRecordDAO.saveTransImage(params,(error,result)=>{
+        if (error) {
+            logger.error(' saveTransImage ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' saveTransImage ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+
 const saveVideo = (req,res,next) =>{
     let params = req.params;
     carRecordDAO.saveVideo(params,(error,result)=>{
@@ -75,18 +103,46 @@ const saveRecord = (req,res,next) =>{
     })
 };
 
-const removeCarImage = (req,res,next) =>{
+const removeStorageImage = (req,res,next) =>{
     let params = req.params;
     carRecordDAO.removeStorageImage(params,(error,result)=>{
         if (error) {
-            logger.error(' saveRecord ' + error.message);
+            logger.error(' removeStorageImage ' + error.message);
             throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
         } else {
-            logger.info(' saveRecord ' + 'success');
+            logger.info(' removeStorageImage ' + 'success');
             resUtil.resetQueryRes(res,result,null);
             return next();
         }
     })
 }
 
-module.exports = {getCarRecords,saveStorageImage,saveRecord,removeCarImage,saveVideo};
+const removeCarImage = (req,res,next) =>{
+    let params = req.params;
+    carRecordDAO.removeCarImage(params,(error,result)=>{
+        if (error) {
+            logger.error(' removeCarImage ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' removeCarImage ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+
+const removeTransImage = (req,res,next) =>{
+    let params = req.params;
+    carRecordDAO.removeCarImage(params,(error,result)=>{
+        if (error) {
+            logger.error(' removeTransImage ' + error.message);
+            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+        } else {
+            logger.info(' removeTransImage ' + 'success');
+            resUtil.resetQueryRes(res,result,null);
+            return next();
+        }
+    })
+}
+
+module.exports = {getCarRecords,saveStorageImage ,saveCarImage ,saveTransImage,saveRecord,removeStorageImage , removeCarImage,removeTransImage,saveVideo};

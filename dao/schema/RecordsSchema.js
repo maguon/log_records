@@ -12,7 +12,9 @@ const ObjectId = Schema.ObjectId;
 const carRecord = new Schema({
     vin : String,
     id : Number ,
+    car_image: {type: Array},
     storage_image: {type: Array},
+    trans_image: {type: Array},
     video: {type: Array},
     comment : {type: Array},
     status : Number,

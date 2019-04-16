@@ -93,8 +93,12 @@ function createServer() {
         maxAge: 0}));
 
     server.get('/api/user/:userId/car/:carId/record',carRecord.getCarRecords);
-    server.del('/api/user/:userId/record/:recordId/image/:url',carRecord.removeCarImage);
+    server.del('/api/user/:userId/record/:recordId/storageImage/:url',carRecord.removeStorageImage);
+    server.del('/api/user/:userId/record/:recordId/carImage/:url',carRecord.removeCarImage);
+    server.del('/api/user/:userId/record/:recordId/transImage/:url',carRecord.removeTransImage);
     server.post({path:'/api/car/:carId/vin/:vin/storageImage',contentType: 'application/json'} ,carRecord.saveStorageImage);
+    server.post({path:'/api/car/:carId/vin/:vin/carImage',contentType: 'application/json'} ,carRecord.saveCarImage);
+    server.post({path:'/api/car/:carId/vin/:vin/transImage',contentType: 'application/json'} ,carRecord.saveTransImage);
     server.post({path:'/api/car/:carId/vin/:vin/video',contentType: 'application/json'} ,carRecord.saveVideo);
     server.post({path:'/api/car/:carId/vin/:vin/record',contentType: 'application/json'} ,carRecord.saveRecord);
     server.get('/api/opRecord',operateRecord.getOperateRecord);
