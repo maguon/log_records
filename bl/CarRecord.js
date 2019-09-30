@@ -86,21 +86,54 @@ const saveVideo = (req,res,next) =>{
 const saveRecord = (req,res,next) =>{
     let params = req.params;
     params.comment = params.content;
-    operateRecordDAO.saveOperateRecord(params,(error,result)=>{
-        if(error){
-            logger.error(' saveOperateRecord ' + error.message);
-        }
-    })
-    carRecordDAO.saveRecord(params,(error,result)=>{
-        if (error) {
-            logger.error(' saveRecord ' + error.message);
-            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
-        } else {
-            logger.info(' saveRecord ' + 'success');
-            resUtil.resetQueryRes(res,result,null);
-            return next();
-        }
-    })
+    if(params.unique ==1){
+        let subParams = {op:params.op,carId:params.carId,vin:params.vin};
+        operateRecordDAO.getOperateRecord(subParams,(err,result)=>{
+
+            if(err){
+                logger.error(' saveRecord ' + err.message);
+                throw sysError.InternalError(err.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+            }else{
+                if(result && result.length>0){
+                    logger.error(' saveRecord ' + sysMsg.SYS_INTERNAL_ERROR_MSG );
+                    throw sysError.InvalidArgumentError(sysMsg.SYS_INTERNAL_ERROR_MSG,sysMsg.SYS_DUPLICATE_ERROR_MSG);
+                }else{
+                    operateRecordDAO.saveOperateRecord(params,(error,result)=>{
+                        if(error){
+                            logger.error(' saveOperateRecord ' + error.message);
+                        }
+                    })
+                    carRecordDAO.saveRecord(params,(error,result)=>{
+                        if (error) {
+                            logger.error(' saveRecord ' + error.message);
+                            throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+                        } else {
+                            logger.info(' saveRecord ' + 'success');
+                            resUtil.resetQueryRes(res,result,null);
+                            return next();
+                        }
+                    })
+                }
+            }
+        })
+    }else{
+        operateRecordDAO.saveOperateRecord(params,(error,result)=>{
+            if(error){
+                logger.error(' saveOperateRecord ' + error.message);
+            }
+        })
+        carRecordDAO.saveRecord(params,(error,result)=>{
+            if (error) {
+                logger.error(' saveRecord ' + error.message);
+                throw sysError.InternalError(error.message,sysMsg.SYS_INTERNAL_ERROR_MSG);
+            } else {
+                logger.info(' saveRecord ' + 'success');
+                resUtil.resetQueryRes(res,result,null);
+                return next();
+            }
+        })
+    }
+
 };
 
 const removeStorageImage = (req,res,next) =>{
