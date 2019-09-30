@@ -86,8 +86,10 @@ const saveVideo = (req,res,next) =>{
 const saveRecord = (req,res,next) =>{
     let params = req.params;
     params.comment = params.content;
+    console.log(params);
     if(params.unique ==1){
         let subParams = {op:params.op,carId:params.carId,vin:params.vin};
+        console.log(subParams)
         operateRecordDAO.getOperateRecord(subParams,(err,result)=>{
 
             if(err){
