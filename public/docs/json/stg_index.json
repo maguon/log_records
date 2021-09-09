@@ -2106,7 +2106,6 @@
             "required": true,
             "type": "integer"
           },
-          ,
           {
             "name": "type",
             "in": "body",
