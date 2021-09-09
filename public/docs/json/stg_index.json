@@ -2018,7 +2018,7 @@
         }
       }
     },
-    "/insureRecord": {
+    "/insure": {
       "get": {
         "tags": [
           "insure"
@@ -2103,13 +2103,6 @@
             "name": "insureId",
             "in": "path",
             "description": "insure unique id",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "type",
-            "in": "body",
-            "description": "insure type truck 1, car 2",
             "required": true,
             "type": "integer"
           },
@@ -2296,6 +2289,9 @@
         },
         "url": {
           "type": "string"
+        },
+        "type": {
+          "type": "integer"
         }
       }
     },
