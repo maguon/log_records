@@ -91,4 +91,13 @@ const truckCheckRecord = new Schema({
     status : Number,
     created_on : {type:Date ,default : Date.now()}
 });
-module.exports = {carRecord,operateRecord,routeRecord,damageRecord ,receiverRecord ,truckDamageRecord ,entrustRecord,checkRecord ,truckCheckRecord}
+
+const insureRecord = new Schema({
+    id : Number ,
+    type : Number ,
+    insure_image: {type: Array},
+    comment : {type: Array},
+    status : Number,
+    created_on : {type:Date ,default : Date.now()}
+});
+module.exports = {carRecord,operateRecord,routeRecord,damageRecord ,receiverRecord ,truckDamageRecord ,entrustRecord,checkRecord ,truckCheckRecord,insureRecord}

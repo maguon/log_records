@@ -18,6 +18,7 @@ const damage = require('./bl/Damage');
 const check = require('./bl/CheckCar');
 const receiverRecord = require('./bl/ReceiverRecord');
 const entrustRecord = require('./bl/EntrustRecord');
+const insure = require('./bl/Insure');
 
 ///--- API
 
@@ -151,6 +152,10 @@ function createServer() {
 
     server.get('/api/entrustRecord',entrustRecord.getEntrustRecord);
     server.post({path:'/api/entrust/:entrustId/cityRouteId/:cityRouteId/entrustRecord',contentType: 'application/json'} ,entrustRecord.saveEntrustRecord);
+    
+    server.get('/api/insure',insure.getInsureRecord);
+    server.post({path:'/api/user/:userId/insure/:insureId/image',contentType: 'application/json'} ,insure.saveInsureImage);
+    server.del('/api/user/:userId/record/:recordId/insureImage/:url',insure.removeInsureImage);
 
 
     server.on('NotFound', function (req, res, next) {

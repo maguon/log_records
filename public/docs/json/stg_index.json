@@ -58,6 +58,13 @@
       }
     },
     {
+      "name": "insure",
+      "description": "insure record",
+      "externalDocs": {
+        "description": "query truck_1 and car_2 insure record "
+      }
+    },
+    {
       "name": "check",
       "description": "check car record",
       "externalDocs": {
@@ -2000,6 +2007,163 @@
             "name": "url",
             "in": "path",
             "description": "receiver image url",
+            "required": true,
+            "type":"string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/insureRecord": {
+      "get": {
+        "tags": [
+          "insure"
+        ],
+        "summary": "query insure record",
+        "description": "",
+        "operationId": "getInsureRecord",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+
+          {
+            "name": "recordId",
+            "in": "query",
+            "description": "record unique id",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "insureId",
+            "in": "query",
+            "description": "insure unique id",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "insure type truck 1,car 2",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "start",
+            "in": "query",
+            "description": "start pos for pagination",
+            "required": false,
+            "type": "integer"
+          },
+          {
+            "name": "size",
+            "in": "query",
+            "description": "query size for pagination",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/insure/{insureId}/image": {
+      "post": {
+        "tags": [
+          "insure"
+        ],
+        "summary": "uploads insure image",
+        "description": "",
+        "operationId": "saveInsureImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "insureId",
+            "in": "path",
+            "description": "insure unique id",
+            "required": true,
+            "type": "integer"
+          },
+          ,
+          {
+            "name": "type",
+            "in": "body",
+            "description": "insure type truck 1, car 2",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "image",
+            "in": "body",
+            "description": "image info",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/image"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    },
+    "/user/{userId}/record/{recordId}/insureImage/{url}": {
+      "delete": {
+        "tags": [
+          "insure"
+        ],
+        "summary": "remove a  insure image",
+        "description": "",
+        "operationId": "removeInsureImage",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "userId",
+            "in": "path",
+            "description": "user unique id",
+            "required": true,
+            "type": "integer"
+          },
+          {
+            "name": "recordId",
+            "in": "path",
+            "description": "car record unique  code",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "url",
+            "in": "path",
+            "description": "insure image url",
             "required": true,
             "type":"string"
           }
